@@ -1,0 +1,2416 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%23e50914'/><text y='.85em' font-size='42' font-family='Arial Black,sans-serif' font-weight='900' fill='white' x='50%25' text-anchor='middle'>QF</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QueerFlix — LGBTQ+ Film ve Dizi Rehberi</title>
+<meta name="description" content="Queer sinemanın en kapsamlı Türkçe arşivi. LGBTQ+ film ve dizileri Türkçe olarak keşfet.">
+<meta name="keywords" content="queer sinema, lgbtq film, lgbtq dizi, gay film, lezbiyen film, trans film">
+<meta property="og:title" content="QueerFlix — LGBTQ+ Film ve Dizi Rehberi">
+<meta property="og:description" content="Queer sinemanın en kapsamlı Türkçe arşivi.">
+<meta property="og:url" content="https://queerflix.online">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://queerflix.online">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface2: #1f1f1f;
+    --border: rgba(255,255,255,0.08);
+    --text: #e5e5e5;
+    --muted: #777;
+    --accent: #e50914;
+    --gay: #e91e8c;
+    --lezbiyen: #7c4dff;
+    --trans: #00bcd4;
+    --biseksüel: #9c27b0;
+    --queer: #ff9800;
+    --belgesel: #4caf50;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO SLIDER ── */
+  .hero-slides {
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 25%;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+  .hero-slide.active { opacity: 1; }
+
+  .hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    line-height: 1;
+  }
+  .hero-arrow:hover { background: rgba(0,0,0,0.7); }
+  .hero-arrow-left { left: 24px; }
+  .hero-arrow-right { right: 24px; }
+
+  .hero-dots {
+    position: absolute;
+    bottom: 20px;
+    right: 48px;
+    display: flex;
+    gap: 6px;
+    z-index: 5;
+  }
+
+  .hero-dot {
+    width: 8px;
+    height: 2px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .hero-dot.active { width: 24px; background: white; }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .hero-btn-play {
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.15s;
+  }
+  .hero-btn-play:hover { background: rgba(255,255,255,0.85); }
+  .hero-btn-play.hidden { display: none; }
+
+  .hero-btn-info {
+    background: rgba(109,109,110,0.7);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .hero-btn-info:hover { background: rgba(109,109,110,0.5); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+    transition: background 0.3s;
+  }
+  nav.scrolled { background: rgba(10,10,10,0.98); }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .search-btn {
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  .search-btn:hover { opacity: 1; }
+
+  /* ── HERO ── */
+  .hero {
+    height: 80vh;
+    min-height: 400px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 48px 60px;
+    background: linear-gradient(135deg, #0d0d2b 0%, #1a0a1a 50%, #0d1a0d 100%);
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(233,30,140,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(124,77,255,0.1) 0%, transparent 60%),
+      radial-gradient(ellipse at 60% 80%, rgba(0,188,212,0.08) 0%, transparent 50%);
+  }
+
+  .hero-gradient {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(to top, var(--bg), transparent);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-language-override: "ENG";
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 80px);
+    line-height: 0.95;
+    letter-spacing: 2px;
+    color: white;
+    margin-bottom: 16px;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.6);
+    max-width: 440px;
+  }
+
+  /* ── FILTERS ── */
+  .filters-wrap {
+    position: sticky;
+    top: 64px;
+    z-index: 90;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+  }
+
+  .filters {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 52px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .filters::-webkit-scrollbar { display: none; }
+
+  .filter-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .filter-btn:hover { color: var(--text); background: var(--surface2); }
+  .filter-btn.active { color: white; background: var(--surface2); }
+  .filter-btn.active[data-cat="Gay"] { color: var(--gay); }
+  .filter-btn.active[data-cat="Lezbiyen"] { color: var(--lezbiyen); }
+  .filter-btn.active[data-cat="Trans"] { color: var(--trans); }
+  .filter-btn.active[data-cat="Biseksüel"] { color: var(--biseksüel); }
+  .filter-btn.active[data-cat="Queer"] { color: var(--queer); }
+  .filter-btn.active[data-cat="Belgesel"] { color: var(--belgesel); }
+
+  .filters-row1 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0 6px;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .filters-row1::-webkit-scrollbar { display: none; }
+
+  .type-btn {
+    flex-shrink: 0;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .type-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.3); }
+  .type-btn.active { color: white; background: var(--surface2); border-color: rgba(255,255,255,0.3); }
+
+  .filter-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  .filter-select {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    flex-shrink: 0;
+  }
+  .filter-select:hover { color: var(--text); }
+
+  /* ── YENİ EKLENENLER ── */
+  .new-section {
+    padding: 20px 48px 0;
+  }
+  .new-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .new-section-grid {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .new-section-grid::-webkit-scrollbar { display: none; }
+  .new-card {
+    flex-shrink: 0;
+    width: 120px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .new-card:hover { transform: scale(1.04); }
+  .new-card-poster {
+    width: 120px;
+    height: 180px;
+    border-radius: 4px;
+    background: var(--surface2);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    padding: 8px;
+    position: relative;
+  }
+  .new-card-poster img { width: 100%; height: 100%; object-fit: cover; }
+  .new-card-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 6px;
+    line-height: 1.3;
+  }
+  .new-card-badge {
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ── GRID ── */
+  .grid-wrap { padding: 32px 48px 80px; }
+
+  .film-count {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+  }
+
+  .card {
+    position: relative;
+    aspect-ratio: 2/3;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--surface);
+    transition: transform 0.2s, z-index 0s;
+  }
+  .card:hover {
+    transform: scale(1.04);
+    z-index: 2;
+  }
+
+  .card-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .card-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 12px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.3;
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 12px;
+  }
+  .card:hover .card-overlay { opacity: 1; }
+
+  .card-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 2px;
+    color: white;
+  }
+
+  .card-type-label {
+    position: absolute;
+    bottom: 32px;
+    right: 6px;
+    background: rgba(0,0,0,0.7);
+    color: rgba(255,255,255,0.7);
+    font-family: 'Inter', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 5px;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .card-stars {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    display: flex;
+    gap: 1px;
+  }
+
+  .card-star {
+    width: 8px;
+    height: 8px;
+    color: #f5c518;
+    opacity: 0.9;
+  }
+
+  .card-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+
+  .card-year {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .card-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .card:hover .card-play { opacity: 1; }
+  .card-play svg { width: 16px; height: 16px; fill: #000; margin-left: 2px; }
+
+  /* ── SEARCH OVERLAY ── */
+  .search-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0,0,0,0.95);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 120px;
+  }
+  .search-overlay.open { display: flex; }
+
+  .search-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .search-input {
+    width: 100%;
+    max-width: 560px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    padding: 12px 0;
+    outline: none;
+    text-align: center;
+  }
+  .search-input::placeholder { color: rgba(255,255,255,0.2); }
+  .search-input:focus { border-color: rgba(255,255,255,0.5); }
+
+  .search-results {
+    width: 100%;
+    max-width: 560px;
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  /* ── SEZON/BÖLÜM SEÇİCİ ── */
+  .episode-selector {
+    margin-top: 16px;
+    display: none;
+  }
+  .episode-selector.visible { display: block; }
+
+  .season-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .season-tabs::-webkit-scrollbar { display: none; }
+
+  .season-tab {
+    flex-shrink: 0;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .season-tab:hover { color: var(--text); }
+  .season-tab.active { color: white; border-color: white; }
+
+  .episode-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 6px;
+    max-height: 120px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface2) transparent;
+  }
+
+  .ep-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    padding: 6px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .ep-btn:hover { color: white; border-color: rgba(255,255,255,0.3); }
+  .ep-btn.active { color: white; background: var(--accent); border-color: var(--accent); }
+
+  .video-unavailable {
+    position: absolute;
+    inset: 48px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0a0a;
+  }
+  .btn-fav {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    transition: all 0.15s;
+  }
+  .btn-fav:hover { border-color: #f5c518; color: #f5c518; }
+  .btn-fav.active { border-color: #f5c518; color: #f5c518; background: rgba(245,197,24,0.1); }
+  .btn-fav svg { transition: fill 0.15s; }
+  .btn-fav.active svg { fill: #f5c518; }
+
+  .fav-count-badge {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #f5c518;
+    color: black;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: transform 0.15s;
+  }
+  .fav-count-badge:hover { transform: scale(1.1); }
+  .fav-count-badge.visible { display: flex; }
+
+  .fav-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(6px);
+    padding: 20px;
+  }
+  .fav-modal.open { display: flex; }
+  .fav-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 32px;
+    position: relative;
+    scrollbar-width: none;
+  }
+  .fav-box::-webkit-scrollbar { display: none; }
+  .fav-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: #f5c518;
+    margin-bottom: 20px;
+  }
+  .fav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .fav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: var(--surface2);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .fav-item:hover { background: var(--border); }
+  .fav-item-info { flex: 1; }
+  .fav-item-title { font-size: 14px; font-weight: 600; color: white; }
+  .fav-item-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .fav-item-remove {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.15s;
+  }
+  .fav-item-remove:hover { color: var(--accent); }
+  .fav-empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 0;
+    font-size: 14px;
+  }
+
+  .btn-share {
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.15s;
+  }
+  .btn-share:hover { background: var(--surface); }
+
+  .similar-section {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .similar-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .similar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .similar-card {
+    background: var(--surface2);
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+    border: 1px solid var(--border);
+  }
+  .similar-card:hover { background: var(--surface); }
+  .similar-card-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+  .similar-card-year {
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  /* ── VIDEO MODAL ── */
+  .video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: #000;
+    display: none;
+    flex-direction: column;
+  }
+  .video-modal.open { display: flex; }
+
+  .video-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: rgba(0,0,0,0.8);
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 10;
+  }
+
+  .video-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+
+  .video-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .video-close:hover { opacity: 1; }
+
+  .video-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 24px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* ── FILM DETAIL PANEL ── */
+  .detail-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(4px);
+  }
+  .detail-panel.open { display: flex; }
+
+  .detail-box {
+    background: var(--surface);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 480px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .detail-poster-area {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .detail-poster-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .detail-poster-grad {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--surface) 0%, transparent 60%);
+  }
+
+  .detail-body {
+    padding: 20px 24px 24px;
+  }
+
+  .detail-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    color: white;
+    margin-bottom: 10px;
+  }
+
+  .detail-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 1px;
+    color: white;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .detail-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .detail-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+  }
+
+  .detail-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn-play {
+    flex: 1;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s;
+  }
+  .btn-play:hover { background: rgba(255,255,255,0.85); }
+  .btn-play:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  .btn-close-detail {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0,0,0,0.6);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .no-results {
+    grid-column: 1/-1;
+    text-align: center;
+    color: var(--muted);
+    padding: 60px 0;
+    font-size: 13px;
+  }
+
+  @media (max-width: 768px) {
+    .new-section { padding: 16px 12px 0; }
+    nav { padding: 0 16px; }
+    .hero { padding: 0 16px 40px; height: 60vh; }
+    .hero-title { font-size: clamp(36px, 10vw, 60px); }
+    .grid-wrap { padding: 20px 12px 60px; }
+    .filters-wrap { padding: 0 12px; }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 6px; }
+    .hero-arrow { width: 36px; height: 36px; font-size: 18px; }
+    .hero-arrow-left { left: 8px; }
+    .hero-arrow-right { right: 8px; }
+    .hero-dots { right: 16px; bottom: 12px; }
+    .hero-actions { gap: 8px; }
+    .hero-btn-play, .hero-btn-info { padding: 8px 16px; font-size: 13px; }
+    .detail-box { width: 95%; }
+    .filter-select { font-size: 11px; padding: 4px 8px; }
+  }
+  /* ── HAKKINDA & İSTE MODAL ── */
+  .about-modal, .request-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(6px);
+    padding: 20px;
+  }
+  .about-modal.open, .request-modal.open { display: flex; }
+
+  .about-box, .request-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 40px;
+    position: relative;
+    scrollbar-width: none;
+  }
+  .about-box::-webkit-scrollbar, .request-box::-webkit-scrollbar { display: none; }
+
+  .about-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.15s;
+  }
+  .about-close:hover { color: white; }
+
+  .about-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--accent);
+    letter-spacing: 4px;
+    margin-bottom: 4px;
+  }
+  .about-tagline {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .about-body p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .about-stats {
+    display: flex;
+    gap: 0;
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .about-stat {
+    flex: 1;
+    text-align: center;
+    padding: 16px;
+    border-right: 1px solid var(--border);
+  }
+  .about-stat:last-child { border-right: none; }
+  .about-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: white;
+    letter-spacing: 2px;
+  }
+  .about-stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .about-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 20px 0;
+  }
+  .about-cat {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: white;
+  }
+  .about-contact {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .about-contact a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .request-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    color: white;
+    margin-bottom: 8px;
+  }
+  .request-sub {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .request-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .request-input {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .request-input:focus { border-color: rgba(255,255,255,0.3); }
+  .request-input::placeholder { color: var(--muted); }
+  .request-submit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 13px;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background 0.15s;
+  }
+  .request-submit:hover { background: #c0070f; }
+  .request-sent {
+    text-align: center;
+    padding: 20px 0;
+    color: white;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    margin-top: 20px;
+  }
+  .footer-inner {
+    max-width: 600px;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+  .footer-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .footer-links {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-links a:hover { color: white; }
+  .footer-legal {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 480px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+    .hero { height: 55vh; min-height: 320px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">QUEERFLIX</a>
+  <div class="nav-right">
+    <button class="nav-link" onclick="openAbout()">Hakkında</button>
+    <button class="nav-link" onclick="openRequest()">Film İste</button>
+    <button class="search-btn" onclick="openSearch()" title="Ara">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO SLIDER -->
+<div class="hero" id="hero">
+  <div class="hero-slides" id="heroSlides"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content" id="heroContent">
+    <span class="hero-tag" id="heroTag" lang="en"></span>
+    <h1 class="hero-title" id="heroTitle" lang="en"></h1>
+    <p class="hero-desc" id="heroDesc"></p>
+    <div class="hero-actions">
+      <button class="hero-btn-play" id="heroBtnPlay" onclick="playHeroFilm()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        İzle
+      </button>
+      <button class="hero-btn-info" onclick="infoHeroFilm()">Detaylar</button>
+    </div>
+  </div>
+  <div class="hero-dots" id="heroDots"></div>
+  <button class="hero-arrow hero-arrow-left" onclick="slideHero(-1)">&#8249;</button>
+  <button class="hero-arrow hero-arrow-right" onclick="slideHero(1)">&#8250;</button>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-wrap">
+  <div class="filters-row1">
+    <button class="type-btn active" data-type="tumu" onclick="setType(this)">Tümü</button>
+    <button class="type-btn" data-type="film" onclick="setType(this)">Filmler</button>
+    <button class="type-btn" data-type="dizi" onclick="setType(this)">Diziler</button>
+    <div class="filter-divider"></div>
+    <select class="filter-select" id="countrySelect" onchange="applyFilters()">
+      <option value="">Tüm Ülkeler</option>
+      <option>ABD</option>
+      <option>Fransa</option>
+      <option>İngiltere</option>
+      <option>İspanya</option>
+      <option>Almanya</option>
+      <option>Türkiye</option>
+      <option>İtalya</option>
+      <option>G.Kore</option>
+      <option>H.Kong</option>
+      <option>Çin</option>
+      <option>Brezilya</option>
+      <option>Meksika</option>
+      <option>Şili</option>
+      <option>Çin</option>
+      <option>Kanada</option>
+    </select>
+    <select class="filter-select" id="yearSelect" onchange="applyFilters()">
+      <option value="">Tüm Yıllar</option>
+      <option value="2020s">2020'ler</option>
+      <option value="2010s">2010'lar</option>
+      <option value="2000s">2000'ler</option>
+      <option value="1990s">1990'lar</option>
+      <option value="1980s">1980'ler</option>
+      <option value="older">1980 öncesi</option>
+    </select>
+  </div>
+  <div class="filters">
+    <button class="filter-btn active" data-cat="Tümü" onclick="setFilter(this)">Tümü</button>
+    <button class="filter-btn" data-cat="Gay" onclick="setFilter(this)">Gay</button>
+    <button class="filter-btn" data-cat="Lezbiyen" onclick="setFilter(this)">Lezbiyen</button>
+    <button class="filter-btn" data-cat="Trans" onclick="setFilter(this)">Trans</button>
+    <button class="filter-btn" data-cat="Biseksüel" onclick="setFilter(this)">Biseksüel</button>
+    <button class="filter-btn" data-cat="Queer" onclick="setFilter(this)">Queer</button>
+    <button class="filter-btn" data-cat="Belgesel" onclick="setFilter(this)">Belgesel</button>
+    <button class="filter-btn" data-cat="Türk Yapımı" onclick="setFilter(this)">Türk Yapımı</button>
+  </div>
+</div>
+
+<!-- YENİ EKLENENLER -->
+<div class="new-section" id="newSection">
+  <div class="new-section-title">YENİ EKLENENLER</div>
+  <div class="new-section-grid" id="newSectionGrid"></div>
+</div>
+
+<!-- GRID -->
+<div class="grid-wrap">
+  <div class="film-count" id="filmCount"></div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-overlay" id="searchOverlay">
+  <button class="search-close" onclick="closeSearch()">×</button>
+  <input class="search-input" id="searchInput" type="text" placeholder="FİLM ARA..." oninput="doSearch(this.value)" autocomplete="off">
+  <div class="search-results" id="searchResults"></div>
+</div>
+
+<!-- DETAIL PANEL -->
+<div class="detail-panel" id="detailPanel" onclick="closeDetailOutside(event)">
+  <div class="detail-box" id="detailBox">
+    <button class="btn-close-detail" onclick="closeDetail()">×</button>
+    <div class="detail-poster-area" id="detailPosterArea">
+      <img class="detail-poster-img" id="detailPosterImg" src="" alt="" style="display:none">
+      <div class="detail-poster-grad"></div>
+    </div>
+    <div class="detail-body">
+      <div class="detail-badge" id="detailBadge"></div>
+      <div class="detail-title" id="detailTitle"></div>
+      <div class="detail-meta" id="detailMeta"></div>
+      <div class="detail-desc" id="detailDesc"></div>
+      <div class="detail-actions">
+        <button class="btn-play" id="btnPlay" onclick="handlePlayBtn()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          İzle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TV SEZON/BÖLÜM PANELİ -->
+<div class="tv-panel" id="tvPanel" onclick="closeTvPanelOutside(event)">
+  <div class="tv-panel-box" id="tvPanelBox">
+    <div class="tv-panel-header">
+      <div>
+        <div class="tv-panel-title" id="tvPanelTitle"></div>
+        <div class="tv-panel-sub">Sezon ve bölüm seçin</div>
+      </div>
+      <button class="btn-close-detail" onclick="closeTvPanel()" style="position:relative;top:auto;right:auto">×</button>
+    </div>
+    <div class="tv-season-tabs" id="tvSeasonTabs"></div>
+    <div class="tv-episodes" id="tvEpisodes"></div>
+  </div>
+</div>
+
+<!-- VIDEO MODAL -->
+<div class="video-modal" id="videoModal">
+  <div class="video-header">
+    <span class="video-title" id="videoModalTitle"></span>
+    <button class="video-close" onclick="closeVideo()">×</button>
+  </div>
+  <iframe class="video-frame" id="videoFrame" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+</div>
+
+<style>
+  .tv-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 250;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(4px);
+  }
+  .tv-panel.open { display: flex; }
+
+  .tv-panel-box {
+    background: var(--surface);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 460px;
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tv-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tv-panel-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: white;
+  }
+
+  .tv-panel-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .tv-season-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tv-season-tabs::-webkit-scrollbar { display: none; }
+
+  .season-tab {
+    flex-shrink: 0;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .season-tab.active { background: white; color: black; border-color: white; }
+
+  .tv-episodes {
+    padding: 12px 24px 20px;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+    gap: 8px;
+  }
+
+  .ep-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .ep-btn:hover { background: white; color: black; border-color: white; }
+</style>
+
+<script>
+  // ── FILM LİSTESİ ──
+  const FILMS = [
+    { type: "film", id: 376867, title: "Moonlight", imdbId: "tt4975722",                       badge: "Gay",       year: 2016, country: "ABD",      desc: "Florida'da büyüyen genç bir Siyah erkeğin kimliğini keşfetme sürecini anlatan Oscar ödüllü film.", qi: 5, videoUrl: "" },
+    { type: "film", id: 142,    title: "Brokeback Mountain", imdbId: "tt0388795",               badge: "Gay",       year: 2005, country: "ABD",      desc: "İki rodeo kovboyunun yıllar içinde gelişen yasak aşkını anlatan queer sinema klasiği.", qi: 5, videoUrl: "" },
+    { type: "film", id: 31225,  title: "Paris Is Burning", imdbId: "tt0100332",                 badge: "Belgesel",  year: 1990, country: "ABD",      desc: "New York Harlem drag ball sahnesini anlatan ve vogueing kültürünü belgeleyen efsanevi film.", qi: 5, videoUrl: "" },
+    { type: "film", id: 258480, title: "Carol", imdbId: "tt2402927",                            badge: "Lezbiyen",  year: 2015, country: "ABD",      desc: "1950'ler New York'unda iki kadın arasında gelişen yasak aşkı anlatan sinematik başyapıt.", qi: 5, videoUrl: "" },
+    { type: "film", id: 11159,  title: "My Own Private Idaho", imdbId: "tt0102494",             badge: "Gay",       year: 1991, country: "ABD",      desc: "River Phoenix ve Keanu Reeves'li, genç erkek fuhuşunu işleyen derin queer yolculuk filmi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 10539,  title: "Milk", imdbId: "tt1013753",                             badge: "Gay",       year: 2008, country: "ABD",      desc: "San Francisco'nun ilk eşcinsel belediye meclis üyesi Harvey Milk'in yaşamını anlatan biyografik film.", qi: 5, videoUrl: "" },
+    { type: "film", id: 10267,  title: "The Rocky Horror Picture Show", imdbId: "tt0073629",    badge: "Queer",     year: 1975, country: "ABD",      desc: "Kült kültürü yaratan efsanevi queer müzikali.", qi: 5, videoUrl: "" },
+    { type: "film", id: 226,    title: "Boys Don't Cry", imdbId: "tt0171804",                   badge: "Trans",     year: 1999, country: "ABD",      desc: "Brandon Teena adlı trans erkeğin gerçek hikayesini anlatan Oscar ödüllü drama.", qi: 5, videoUrl: "" },
+    { type: "film", id: 522,    title: "Hedwig and the Angry Inch", imdbId: "tt0248845",        badge: "Trans",     year: 2001, country: "ABD",      desc: "Doğu Almanya'dan Amerika'ya gelen trans bir rock müzisyenin müzikali.", qi: 5, videoUrl: "" },
+    { type: "film", id: 322588, title: "Tangerine", imdbId: "tt3824458",                        badge: "Trans",     year: 2015, country: "ABD",      desc: "Los Angeles trans kadınlarının bir Noel Gecesi'ni anlatan iPhone ile çekilmiş film.", qi: 5, videoUrl: "" },
+    { type: "film", id: 6977,   title: "Philadelphia", imdbId: "tt0107818",                     badge: "Gay",       year: 1993, country: "ABD",      desc: "AIDS hastası bir avukatın işsizliğe karşı verdiği hukuki mücadeleyi anlatan drama.", qi: 4, videoUrl: "" },
+    { type: "film", id: 39254,  title: "The Kids Are All Right", imdbId: "tt1084950",           badge: "Lezbiyen",  year: 2010, country: "ABD",      desc: "İki lezbiyen annenin çocukları biyolojik babalarını bulduğunda yaşananlar.", qi: 4, videoUrl: "" },
+    { type: "film", id: 10862,  title: "But I'm a Cheerleader", imdbId: "tt0179116",            badge: "Lezbiyen",  year: 1999, country: "ABD",      desc: "Eşcinsel düzeltme kampına gönderilen bir liseli kızın komik hikayesi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 8985,   title: "Shortbus", imdbId: "tt0450278",                         badge: "Queer",     year: 2006, country: "ABD",      desc: "New York'un queer sahnesini anlatan cesur ve özgür John Cameron Mitchell filmi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 820965, title: "Fire Island", imdbId: "tt13406086",                      badge: "Gay",       year: 2022, country: "ABD",      desc: "Asya Amerikalı gay arkadaşların yaz tatilini anlatan romantik komedi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 301359, title: "The Normal Heart", imdbId: "tt1910272",                 badge: "Gay",       year: 2014, country: "ABD",      desc: "AIDS krizinin başlarında New York'ta bir aktivist grubun mücadelesini anlatan drama.", qi: 5, videoUrl: "" },
+    { type: "film", id: 43199,  title: "Desert Hearts", imdbId: "tt0089048",                    badge: "Lezbiyen",  year: 1985, country: "ABD",      desc: "1950'lerde Nevada çölünde iki kadının yaşadığı aşk hikayesi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 11370,  title: "Bound", imdbId: "tt0115736",                            badge: "Lezbiyen",  year: 1996, country: "ABD",      desc: "Wachowski kardeşlerden lezbiyen neo-noir gerilim klasiği.", qi: 5, videoUrl: "" },
+    { type: "film", id: 72976,  title: "Pariah", imdbId: "tt1488606",                           badge: "Lezbiyen",  year: 2011, country: "ABD",      desc: "Brooklyn'de yaşayan genç Siyah bir lezbiyenin kimliğini keşfetme süreci.", qi: 5, videoUrl: "" },
+    { type: "film", id: 15592,  title: "Dallas Buyers Club", imdbId: "tt0790636",               badge: "Queer",     year: 2013, country: "ABD",      desc: "AIDS hastası bir Teksaslı kovboyun ilaç sistemine karşı mücadelesi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 13061,  title: "Velvet Goldmine", imdbId: "tt0120879",                  badge: "Biseksüel", year: 1998, country: "ABD",      desc: "1970'lerin glam rock dünyasında biseksüel bir rock yıldızının hikayesi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 4348,   title: "Transamerica", imdbId: "tt0407265",                     badge: "Trans",     year: 2005, country: "ABD",      desc: "Ameliyat öncesinde kaybolan oğlunu bulmak zorunda kalan trans bir kadının yolculuğu.", qi: 5, videoUrl: "" },
+    { type: "film", id: 458131, title: "Bros", imdbId: "tt14571278",                             badge: "Gay",       year: 2022, country: "ABD",      desc: "Hollywood'un ilk büyük stüdyo gay romantik komedisi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 479529, title: "Love Simon", imdbId: "tt5164432",                       badge: "Gay",       year: 2018, country: "ABD",      desc: "Lise öğrencisi Simon'ın kimliğini açıklama sürecini anlatan sıcak film.", qi: 4, videoUrl: "" },
+    { type: "film", id: 9593,   title: "The Birdcage", imdbId: "tt0115742",                     badge: "Gay",       year: 1996, country: "ABD",      desc: "Robin Williams ve Nathan Lane'li, eşcinsel bir çiftin oğullarının düğününde yaşanan efsanevi komedi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 9928,   title: "Far from Heaven", imdbId: "tt0297534",                  badge: "Gay",       year: 2002, country: "ABD",      desc: "1950'ler Amerika'sının arkasındaki gerçekleri gösteren Todd Haynes melodramı.", qi: 4, videoUrl: "" },
+    { type: "film", id: 829799, title: "Bottoms", imdbId: "tt21823606",                          badge: "Lezbiyen",  year: 2023, country: "ABD",      desc: "İki lezbiyen liseli kızın kaos dolu dövüş kulübü kurmaya çalıştığı komedi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 774825, title: "Tar", imdbId: "tt14444726",                              badge: "Lezbiyen",  year: 2022, country: "ABD",      desc: "Cate Blanchett'in muhteşem performansıyla queer bir orkestra şefinin düşüşünü anlatan drama.", qi: 4, videoUrl: "" },
+    { type: "film", id: 30547,  title: "Mysterious Skin", imdbId: "tt0370986",                  badge: "Gay",       year: 2004, country: "ABD",      desc: "Gregg Araki'nin gençlikte yaşanan travmayı anlatan karanlık ve güçlü filmi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 22881,  title: "Saving Face", imdbId: "tt0362272",                      badge: "Lezbiyen",  year: 2004, country: "ABD",      desc: "Çin Amerikalı bir lezbiyen cerrahın ailesiyle yüzyüze geldiği film.", qi: 4, videoUrl: "" },
+    // Fransa
+    { type: "film", id: 426426, title: "Portrait of a Lady on Fire", imdbId: "tt8613070",       badge: "Lezbiyen",  year: 2019, country: "Fransa",   desc: "18. yüzyıl Bretanya'sında ressam ile modeli arasındaki sessiz ama yoğun aşk.", qi: 5, videoUrl: "" },
+    { type: "film", id: 38357,  title: "Blue Is the Warmest Colour", imdbId: "tt2278871",       badge: "Lezbiyen",  year: 2013, country: "Fransa",   desc: "Cannes Altın Palmiyesi kazanan iki genç kadın arasındaki tutkulu aşk filmi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 252171, title: "120 BPM", imdbId: "tt6509790",                          badge: "Gay",       year: 2017, country: "Fransa",   desc: "Paris Act Up grubunun AIDS krizindeki aktivizmini anlatan güçlü ve etkili film.", qi: 5, videoUrl: "" },
+    { type: "film", id: 196867, title: "Stranger by the Lake", imdbId: "tt2759100",             badge: "Gay",       year: 2013, country: "Fransa",   desc: "Bir göl kıyısında geçen gerilimli ve erotik queer aşk hikayesi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 12453,  title: "Beau Travail", imdbId: "tt0167946",                     badge: "Gay",       year: 1999, country: "Fransa",   desc: "Claire Denis'in Fransız Yabancı Lejyonu'nda geçen homoerotik şaheseri.", qi: 5, videoUrl: "" },
+    { type: "film", id: 33421,  title: "Water Lilies", imdbId: "tt0489487",                     badge: "Lezbiyen",  year: 2007, country: "Fransa",   desc: "Céline Sciamma'nın ilk filmi, üç genç kızın yaz aşkını anlatan hassas drama.", qi: 4, videoUrl: "" },
+    { type: "film", id: 50456,  title: "Tomboy", imdbId: "tt1847731",                           badge: "Trans",     year: 2011, country: "Fransa",   desc: "Yeni bir mahalleye taşınan genç bir çocuğun cinsiyet kimliğini keşfetmesi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 570984, title: "Benedetta", imdbId: "tt8858878",                        badge: "Lezbiyen",  year: 2021, country: "Fransa",   desc: "17. yüzyılda yaşayan bir rahibenin yasak aşkını anlatan Paul Verhoeven filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 664767, title: "Summer of 85", imdbId: "tt9633464",                     badge: "Gay",       year: 2020, country: "Fransa",   desc: "Fransız sahil kasabasında iki genç erkek arasındaki yoğun yaz aşkını anlatan film.", qi: 5, videoUrl: "" },
+    { type: "film", id: 379019, title: "Being 17", imdbId: "tt4550098",                         badge: "Gay",       year: 2016, country: "Fransa",   desc: "İki genç erkeğin düşmanlığı aşka dönüşümünü anlatan André Téchiné filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 826732, title: "Passages", imdbId: "tt22866866",                         badge: "Biseksüel", year: 2023, country: "Fransa",   desc: "Paris'te bir yönetmenin iki ilişki arasında sıkışıp kaldığı tutku dolu drama.", qi: 4, videoUrl: "" },
+    // Ingiltere
+    { type: "film", id: 64686,  title: "Weekend", imdbId: "tt1714210",                          badge: "Gay",       year: 2011, country: "İngiltere",desc: "Bir hafta sonu boyunca iki yabancının arasında gelişen nazik aşk hikayesi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 430826, title: "God's Own Country", imdbId: "tt5635086",                badge: "Gay",       year: 2017, country: "İngiltere",desc: "Yorkshire çerçevesinde bir genç çiftçi ile Rumen mevsimlik işçinin aşkını anlatan film.", qi: 5, videoUrl: "" },
+    { type: "film", id: 15776,  title: "Maurice", imdbId: "tt0093462",                          badge: "Gay",       year: 1987, country: "İngiltere",desc: "E.M. Forster'ın Edwardian döneminde geçen queer aşk romanının uyarlaması.", qi: 5, videoUrl: "" },
+    { type: "film", id: 11248,  title: "My Beautiful Laundrette", imdbId: "tt0089754",          badge: "Gay",       year: 1985, country: "İngiltere",desc: "Thatcher döneminde Londra'da iki erkeğin aşkını anlatan kültürel başyapıt.", qi: 5, videoUrl: "" },
+    { type: "film", id: 6006,   title: "Orlando", imdbId: "tt0107516",                          badge: "Queer",     year: 1992, country: "İngiltere",desc: "Virginia Woolf romanından uyarlanan, cinsiyet ötesinde bir varlığın 400 yıllık hikayesi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 260522, title: "Pride", imdbId: "tt3169706",                            badge: "Gay",       year: 2014, country: "İngiltere",desc: "LGBTQ+ aktivistlerin 1984'te Galler maden işçilerini destekleme hikayesi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 625281, title: "Ammonite", imdbId: "tt8933476",                         badge: "Lezbiyen",  year: 2020, country: "İngiltere",desc: "Fosil bilimci Mary Anning ve genç bir kadınla olan yasak aşkını anlatan period drama.", qi: 4, videoUrl: "" },
+    // Ispanya
+    { type: "film", id: 1049,   title: "All About My Mother", imdbId: "tt0185125",              badge: "Queer",     year: 1999, country: "İspanya",  desc: "Pedro Almodóvar'ın queer karakterlerle dolu Oscar ödüllü şaheseri.", qi: 5, videoUrl: "" },
+    { type: "film", id: 11216,  title: "Bad Education", imdbId: "tt0275491",                    badge: "Gay",       year: 2004, country: "İspanya",  desc: "Almodóvar'ın film noir unsurlarını queer temayla birleştirdiği gerilim filmi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 8883,   title: "Law of Desire", imdbId: "tt0093285",                    badge: "Gay",       year: 1987, country: "İspanya",  desc: "Almodóvar'ın eşcinsel aşk üçgenini anlatan tutkulu erken dönem klasiği.", qi: 5, videoUrl: "" },
+    { type: "film", id: 179430, title: "Pain and Glory", imdbId: "tt8291806",                   badge: "Gay",       year: 2019, country: "İspanya",  desc: "Almodóvar'ın otobiyografik queer filmi, Antonio Banderas ile.", qi: 4, videoUrl: "" },
+    // Almanya
+    { type: "film", id: 716695, title: "Great Freedom", imdbId: "tt9174700",                    badge: "Gay",       year: 2021, country: "Almanya",  desc: "Eşcinselliğin suç sayıldığı Almanya'da hapishane duvarları arasında gelişen aşk.", qi: 5, videoUrl: "" },
+    // Turkiye
+    { type: "film", id: 77483,  title: "Zenne", imdbId: "tt1856055",                            badge: "Türk Yapımı",year: 2011,country: "Türkiye",  desc: "Türkiye'nin ilk açıkça eşcinsel dansçısı Ahmet Yıldız'ın hikayesinden esinlenen film.", qi: 5, videoUrl: "" },
+    // Italya
+    { type: "film", id: 398978, title: "Call Me by Your Name", imdbId: "tt5726616",             badge: "Gay",       year: 2017, country: "İtalya",   desc: "1983 İtalya'sında geçen Elio ve Oliver'ın büyüleyici yaz aşkı hikayesi.", qi: 4, videoUrl: "" },
+    // Asya
+    { type: "film", id: 290098, title: "The Handmaiden", imdbId: "tt4016934",                   badge: "Lezbiyen",  year: 2016, country: "G.Kore",   desc: "Park Chan-wook'un iki kadından oluşan karmaşık ve erotik gerilim şaheseri.", qi: 5, videoUrl: "" },
+    { type: "film", id: 11160,  title: "Happy Together", imdbId: "tt0118845",                   badge: "Gay",       year: 1997, country: "H.Kong",   desc: "Wong Kar-wai'ın Buenos Aires'te iki Hong Konglu erkek arasındaki yıkıcı aşk hikayesi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 10329,  title: "Farewell My Concubine", imdbId: "tt0106332",            badge: "Gay",       year: 1993, country: "Çin",      desc: "Çin opera dünyasında elli yıla yayılan efsanevi queer aşk hikayesi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 254128, title: "The Way He Looks", imdbId: "tt2870670",                 badge: "Gay",       year: 2014, country: "Brezilya", desc: "Kör bir genç erkeğin aşkı ve bağımsızlığı keşfettiği Brezilya filmi.", qi: 4, videoUrl: "" },
+    // Latin Amerika
+    { type: "film", id: 9529,   title: "Y Tu Mama Tambien", imdbId: "tt0246677",                badge: "Biseksüel", year: 2001, country: "Meksika",  desc: "Alfonso Cuarón'un iki genç erkek ve bir kadının yolculuğunu anlatan filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 376293, title: "A Fantastic Woman", imdbId: "tt5795906",                badge: "Trans",     year: 2017, country: "Şili",     desc: "Sevgilisinin ölümünün ardından ailesinin önyargısına direnen trans bir kadının hikayesi.", qi: 5, videoUrl: "" },
+    // Kanada
+    { type: "film", id: 116492, title: "Laurence Anyways", imdbId: "tt1861523",                 badge: "Trans",     year: 2012, country: "Kanada",   desc: "Xavier Dolan'ın trans bir kadının on yıllık aşk ve dönüşüm hikayesini anlatan epik filmi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 205596, title: "The Imitation Game", imdbId: "tt2084970",               badge: "Gay",       year: 2014, country: "İngiltere",desc: "Eşcinsel bilgisayar bilimcisi Alan Turing'in II. Dünya Savaşı sırasındaki hikayesi.", qi: 3, videoUrl: "" },
+    { type: "film", id: 14132,  title: "Hamam", imdbId: "tt0119115", badge: "Gay", year: 1997, country: "Türkiye", desc: "İtalyan bir mimarın İstanbul'da dedesinden kalan hamamı devralmasıyla başlayan ve kimliğini sorgulamasına yol açan queer bir yolculuk.", qi: 5, videoUrl: "" },
+    { type: "film", id: 63858,  title: "Harem Suare", imdbId: "tt0166930", badge: "Queer", year: 1999, country: "Türkiye", desc: "Osmanlı'nın son döneminde bir haremde yaşayan kadınların özgürlük, arzu ve iktidar mücadelesini anlatan görsel şölen.", qi: 5, videoUrl: "" },
+    { type: "film", id: 440472, title: "Körfez", imdbId: "tt6741522", badge: "Gay", year: 2018, country: "Türkiye", desc: "İki erkeğin İstanbul kıyısında birbirini bulduğu ve kimliklerini sorguladığı sessiz ve güçlü bir Türk queer filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 11838,  title: "The Celluloid Closet", imdbId: "tt0112651", badge: "Belgesel", year: 1995, country: "ABD", desc: "Hollywood sinemasında eşcinselliğin tarihi ve LGBTQ+ karakterlerin perdedeki evrimini anlatan çığır açan belgesel.", qi: 5, videoUrl: "" },
+    { type: "film", id: 83879,  title: "How to Survive a Plague", imdbId: "tt2124189", badge: "Belgesel", year: 2012, country: "ABD", desc: "AIDS krizinde ACT UP aktivistlerinin ilaç erişimi için verdikleri tarihi mücadeleyi belgeleyen Oscar adayı film.", qi: 5, videoUrl: "" },
+    { type: "film", id: 742653, title: "Disclosure", imdbId: "tt11038710", badge: "Belgesel", year: 2020, country: "ABD", desc: "Laverne Cox'un sunduğu, Hollywood'da trans temsili ve medyanın trans kimlikler üzerindeki etkisini inceleyen Netflix belgese.", qi: 5, videoUrl: "" },
+    { type: "film", id: 736261, title: "Flee", imdbId: "tt12376798", badge: "Belgesel", year: 2021, country: "Danimarka", desc: "Afganistan'dan kaçan eşcinsel bir mültecinin animasyon ve belgesel karışımıyla anlatılan güçlü ve kişisel hikayesi.", qi: 5, videoUrl: "" },
+    // ===== DİZİLER =====
+    { type: "dizi", id: 87917,  title: "It's a Sin",           imdbId: "tt9814116", badge: "Gay",      year: 2021, country: "İngiltere", desc: "AIDS krizinin gölgesinde büyüyen genç eşcinsel erkeklerin 1980'ler Londra'sındaki yaşamını anlatan dokunaklı mini dizi.", qi: 5, videoUrl: "" },
+    { type: "dizi", id: 72643,  title: "Pose",                  imdbId: "tt7562112", badge: "Trans",    year: 2018, country: "ABD",       desc: "1980'ler New York'unda trans kadınların ve drag sanatçılarının ballroom kültüründeki yaşamlarını anlatan güçlü drama dizisi.", qi: 5, videoUrl: "" },
+    { type: "dizi", id: 124834, title: "Heartstopper",          imdbId: "tt10623646",badge: "Gay",      year: 2022, country: "İngiltere", desc: "İki lise öğrencisinin arkadaşlıktan aşka dönüşen ilişkisini anlatan sevecen ve renkli İngiliz dizisi.", qi: 5, videoUrl: "" },
+    { type: "dizi", id: 1371,  title: "The L Word",            imdbId: "tt0370986", badge: "Lezbiyen", year: 2004, country: "ABD",       desc: "Los Angeles'ta yaşayan lezbiyen ve biseksüel kadınların hayatlarını, ilişkilerini ve mücadelelerini anlatan öncü dizi.", qi: 5, videoUrl: "" },
+    { type: "dizi", id: 85552,   title: "Euphoria",              imdbId: "tt8772296", badge: "Queer",    year: 2019, country: "ABD",       desc: "Kimlik, cinsellik ve bağımlılık temalarını cesurca işleyen, genç yetişkinlerin hayatını anlatan çarpıcı drama dizisi.", qi: 4, videoUrl: "" },
+    { type: "dizi", id: 4395,  title: "Queer as Folk",         imdbId: "tt0262985", badge: "Gay",      year: 1999, country: "İngiltere", desc: "Manchester'daki genç eşcinsel erkeklerin yaşamlarını, ilişkilerini ve özgürlük arayışlarını anlatan devrim niteliğinde dizi.", qi: 5, videoUrl: "" },
+    { type: "dizi", id: 100532,  title: "Feel Good",             imdbId: "tt9628788", badge: "Lezbiyen", year: 2020, country: "İngiltere", desc: "Kanadalı komedyen Mae Martin'in kendi hayatından ilham alarak yazdığı bağımlılık ve aşkı işleyen otobiyografik komedi.", qi: 5, videoUrl: "" },
+    { type: "dizi", id: 1398,  title: "Orange Is the New Black",imdbId: "tt2372162",badge: "Lezbiyen", year: 2013, country: "ABD",       desc: "Kadın cezaevinde geçen, LGBTQ+ karakterlere geniş yer veren Netflix'in çığır açan drama dizisi.", qi: 4, videoUrl: "" },
+    { type: "dizi", id: 5765,  title: "RuPaul's Drag Race",    imdbId: "tt1353056", badge: "Queer",    year: 2009, country: "ABD",       desc: "RuPaul'un sunduğu, drag sanatçılarının yarıştığı ve queer kültürünü ana akıma taşıyan efsanevi yarışma programı.", qi: 5, videoUrl: "" },
+    { type: "dizi", id: 100882,  title: "Sex Education",         imdbId: "tt7767422", badge: "Queer",    year: 2019, country: "İngiltere", desc: "Cinsellik, kimlik ve ilişkiler üzerine açık yürekli bir lise dizisi; LGBTQ+ karakterlere derin yer veriyor.", qi: 4, videoUrl: "" },
+    { type: "dizi", id: 61888,  title: "Sense8",                imdbId: "tt2431438", badge: "Queer",    year: 2015, country: "ABD",       desc: "Wachowski kardeşlerin yazdığı, dünyaya yayılmış sekiz kişinin zihinsel olarak birbirine bağlı olduğu queer bilim kurgu dizisi.", qi: 5, videoUrl: "" },
+    { type: "dizi", id: 54344,  title: "The Handmaid's Tale",   imdbId: "tt5834204", badge: "Queer",    year: 2017, country: "ABD",       desc: "Ataerkil bir distopik düzende kadınların mücadelesini anlatan; feminist ve queer temaları güçlü biçimde işleyen dizi.", qi: 4, videoUrl: "" },
+    { type: "dizi", id: 301507, title: "Heated Rivalry", imdbId: "tt35495073", badge: "Gay", year: 2025, country: "Kanada", desc: "Rakip hokey takımlarının iki süperstarı, buz pistindeki amansız rekabetleri eşcinsel bir aşka dönüşürken kendilerini ve duygularını keşfeder.", qi: 5, videoUrl: "" },
+    // ✏️ YENİ FİLM:
+    // { id: TMDB_ID, title: "Film Adi", badge: "Gay/Lezbiyen/Trans/Biseksüel/Queer/Belgesel/Türk Yapımı", year: 2020, country: "Ulke", desc: "Aciklama.", qi: 1-5, videoUrl: "" },
+  ];
+
+  const BADGE_COLORS = {
+    "Gay":        "#e91e8c",
+    "Lezbiyen":   "#7c4dff",
+    "Trans":      "#00bcd4",
+    "Biseksüel":  "#9c27b0",
+    "Queer":      "#ff9800",
+    "Belgesel":   "#4caf50",
+    "Türk Yapımı":"#e91e8c",
+  };
+
+  const IMG_BASE = "https://image.tmdb.org/t/p/w300";
+  const IMG_BIG  = "https://image.tmdb.org/t/p/w780";
+  let TMDB_KEY   = localStorage.getItem("tmdb_key") || "4b19cfb150897a9071d51539b2ffc42f";
+  let posters    = {}; // id -> poster_path
+  let backdrops  = {}; // id -> backdrop_path
+  let currentFilter = "Tümü";
+  let currentSeason = 1;
+  let currentEpisode = 1;
+  let currentType = "tumu";
+  let currentFilm = null;
+
+  // ── BUILD CARDS ──
+  function buildCards(films) {
+    const grid = document.getElementById("grid");
+    const count = document.getElementById("filmCount");
+    grid.innerHTML = "";
+    count.textContent = films.length + " film";
+
+    films.forEach(film => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.onclick = () => openDetail(film);
+
+      const badgeColor = BADGE_COLORS[film.badge] || "#e91e8c";
+      const poster = posters[film.id];
+      const bgColor = {
+        "Gay": "#3a0820", "Lezbiyen": "#1a0a3a", "Trans": "#0a2a2a",
+        "Biseksüel": "#1a0a2a", "Queer": "#2a1500", "Belgesel": "#0a2a0a", "Türk Yapımı": "#3a0820"
+      }[film.badge] || "#141414";
+
+      card.innerHTML =
+        '<div class="card-bg" style="background:' + bgColor + '">' +
+          (poster
+            ? '<img class="card-poster" src="' + IMG_BASE + poster + '" alt="' + film.title + '" loading="lazy">'
+            : film.title) +
+        '</div>' +
+        '<div class="card-badge" style="background:' + badgeColor + '">' + film.badge + '</div>' +
+        '<div class="card-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>' +
+        '<div class="card-overlay">' +
+          '<div class="card-title">' + film.title + '</div>' +
+          '<div class="card-year">' + film.year + ' · ' + film.country + '</div>' +
+        '</div>';
+
+      grid.appendChild(card);
+    });
+  }
+
+  function getFiltered() {
+    let list = FILMS;
+    if (currentType !== "tumu") list = list.filter(f => f.type === currentType);
+    if (currentFilter !== "Tümü") list = list.filter(f => f.badge === currentFilter);
+    const country = document.getElementById("countrySelect")?.value;
+    if (country) list = list.filter(f => f.country === country);
+    const yearRange = document.getElementById("yearSelect")?.value;
+    if (yearRange) {
+      list = list.filter(f => {
+        if (yearRange === "2020s") return f.year >= 2020;
+        if (yearRange === "2010s") return f.year >= 2010 && f.year < 2020;
+        if (yearRange === "2000s") return f.year >= 2000 && f.year < 2010;
+        if (yearRange === "1990s") return f.year >= 1990 && f.year < 2000;
+        if (yearRange === "1980s") return f.year >= 1980 && f.year < 1990;
+        if (yearRange === "older") return f.year < 1980;
+        return true;
+      });
+    }
+    return list;
+  }
+
+  function setType(btn) {
+    document.querySelectorAll(".type-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentType = btn.dataset.type;
+    buildCards(getFiltered());
+  }
+
+  function setFilter(btn) {
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentFilter = btn.dataset.cat;
+    buildCards(getFiltered());
+  }
+
+  function applyFilters() {
+    buildCards(getFiltered());
+  }
+
+  // ── DETAIL ──
+  function openDetail(film) {
+    currentFilm = film;
+    currentSeason = 1;
+    currentEpisode = 1;
+    const badgeColor = BADGE_COLORS[film.badge] || "#e91e8c";
+    const poster = posters[film.id];
+
+    document.getElementById("detailBadge").textContent = film.badge;
+    document.getElementById("detailBadge").style.background = badgeColor;
+    document.getElementById("detailTitle").textContent = film.title;
+    document.getElementById("detailMeta").textContent = film.year + " · " + film.country + ((film.type || "film") === "dizi" ? " · Dizi" : "");
+    document.getElementById("detailDesc").textContent = film.desc;
+
+    const img = document.getElementById("detailPosterImg");
+    const area = document.getElementById("detailPosterArea");
+    if (poster) {
+      img.src = IMG_BIG + poster;
+      img.style.display = "block";
+      area.style.background = "";
+    } else {
+      img.style.display = "none";
+      area.style.background = "linear-gradient(135deg, #1a0a1a, #0a1a2a)";
+    }
+
+    const btn = document.getElementById("btnPlay");
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> İzle';
+
+    // Show episode selector for series
+    if ((film.type || "film") === "dizi") {
+      document.getElementById("tvPanelTitle").textContent = film.title;
+      loadSeasons(film);
+    }
+
+    document.getElementById("detailPanel").classList.add("open");
+    document.body.style.overflow = "hidden";
+    buildSimilar(film);
+    updateFavBtn();
+  }
+
+  async function loadSeasons(film) {
+    if (!TMDB_KEY) { buildSeasonUI(film, 3, 10); return; }
+    try {
+      const res = await fetch("https://api.themoviedb.org/3/tv/" + film.id + "?api_key=" + TMDB_KEY);
+      const data = await res.json();
+      const seasons = (data.seasons || []).filter(s => s.season_number > 0);
+      const seasonData = seasons.map(s => ({ num: s.season_number, eps: s.episode_count }));
+      buildSeasonUI(film, seasonData);
+    } catch(e) {
+      buildSeasonUI(film, null);
+    }
+  }
+
+  function buildSeasonUI(film, seasonData) {
+    const tabsEl = document.getElementById("tvSeasonTabs");
+    const gridEl = document.getElementById("tvEpisodes");
+    tabsEl.innerHTML = "";
+    gridEl.innerHTML = "";
+
+    let seasons = [];
+    if (Array.isArray(seasonData)) {
+      seasons = seasonData;
+    } else {
+      // fallback: assume 1 season with seasonData episodes
+      const epCount = typeof seasonData === "number" ? seasonData : 10;
+      seasons = [{ num: 1, eps: epCount }];
+    }
+
+    seasons.forEach(s => {
+      const tab = document.createElement("button");
+      tab.className = "season-tab" + (s.num === currentSeason ? " active" : "");
+      tab.textContent = "Sezon " + s.num;
+      tab.onclick = () => {
+        currentSeason = s.num;
+        currentEpisode = 1;
+        document.querySelectorAll(".season-tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        buildEpisodeGrid(s.eps);
+      };
+      tabsEl.appendChild(tab);
+    });
+
+    if (seasons.length > 0) buildEpisodeGrid(seasons[0].eps);
+  }
+
+  function buildEpisodeGrid(epCount) {
+    const gridEl = document.getElementById("tvEpisodes");
+    gridEl.innerHTML = "";
+    for (let i = 1; i <= epCount; i++) {
+      const btn = document.createElement("button");
+      btn.className = "ep-btn" + (i === currentEpisode ? " active" : "");
+      btn.textContent = i;
+      btn.onclick = () => {
+        currentEpisode = i;
+        document.querySelectorAll(".ep-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+      };
+      gridEl.appendChild(btn);
+    }
+  }
+
+  function closeDetail() {
+    document.getElementById("detailPanel").classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  // ── FAVORİLER ──
+  let favorites = JSON.parse(localStorage.getItem("qf_favs") || "[]");
+
+  function saveFavs() {
+    localStorage.setItem("qf_favs", JSON.stringify(favorites));
+    updateFavBadge();
+  }
+
+  function updateFavBadge() {
+    const badge = document.getElementById("favBadge");
+    if (!badge) return;
+    if (favorites.length > 0) {
+      badge.classList.add("visible");
+      badge.textContent = "★ " + favorites.length;
+    } else {
+      badge.classList.remove("visible");
+    }
+  }
+
+  function toggleFav() {
+    if (!currentFilm) return;
+    const idx = favorites.findIndex(f => f.id === currentFilm.id);
+    if (idx === -1) {
+      favorites.push({ id: currentFilm.id, title: currentFilm.title, badge: currentFilm.badge, year: currentFilm.year, type: currentFilm.type || "film" });
+      document.getElementById("btnFav").classList.add("active");
+      showToast("Favorilere eklendi ★");
+    } else {
+      favorites.splice(idx, 1);
+      document.getElementById("btnFav").classList.remove("active");
+      showToast("Favorilerden çıkarıldı");
+    }
+    saveFavs();
+  }
+
+  function updateFavBtn() {
+    if (!currentFilm) return;
+    const btn = document.getElementById("btnFav");
+    if (!btn) return;
+    const isFav = favorites.some(f => f.id === currentFilm.id);
+    btn.classList.toggle("active", isFav);
+  }
+
+  function openFavModal() {
+    const modal = document.getElementById("favModal");
+    const list = document.getElementById("favList");
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+    if (favorites.length === 0) {
+      list.innerHTML = '<div class="fav-empty">Henüz favori eklemediniz.<br>Film detayında ★ butonuna basın.</div>';
+      return;
+    }
+    list.innerHTML = favorites.map(f => {
+      const film = FILMS.find(x => x.id === f.id);
+      return '<div class="fav-item" data-id="' + f.id + '">' +
+        '<div class="fav-item-info">' +
+          '<div class="fav-item-title">' + f.title + '</div>' +
+          '<div class="fav-item-meta">' + f.year + ' · ' + f.badge + ' · ' + (f.type === "dizi" ? "Dizi" : "Film") + '</div>' +
+        '</div>' +
+        '<button class="fav-item-remove" data-remove="' + f.id + '">&times;</button>' +
+      '</div>';
+    }).join("");
+    list.querySelectorAll(".fav-item").forEach(el => {
+      el.addEventListener("click", () => {
+        const film = FILMS.find(x => x.id === parseInt(el.dataset.id));
+        if (film) { closeFavModal(); openDetail(film); }
+      });
+    });
+    list.querySelectorAll(".fav-item-remove").forEach(btn => {
+      btn.addEventListener("click", e => {
+        e.stopPropagation();
+        removeFav(parseInt(btn.dataset.remove));
+      });
+    });
+  }
+
+  function removeFav(id) {
+    favorites = favorites.filter(f => f.id !== id);
+    saveFavs();
+    openFavModal();
+  }
+
+  function closeFavModal() {
+    document.getElementById("favModal").classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  function closeFavModalOutside(e) {
+    if (e.target === document.getElementById("favModal")) closeFavModal();
+  }
+
+  function shareFilm() {
+    if (!currentFilm) return;
+    const text = currentFilm.title + " — QueerFlix LGBTQ+ Film Rehberi\nhttps://kultfilm.pages.dev";
+    if (navigator.share) {
+      navigator.share({ title: currentFilm.title, text: text, url: "https://kultfilm.pages.dev" });
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => showToast("Link kopyalandı!"));
+    } else {
+      const wa = "https://wa.me/?text=" + encodeURIComponent(text);
+      window.open(wa, "_blank");
+    }
+  }
+
+  function showToast(msg) {
+    let t = document.getElementById("toast");
+    if (!t) {
+      t = document.createElement("div");
+      t.id = "toast";
+      t.style.cssText = "position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;z-index:9999;transition:opacity 0.3s";
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.style.opacity = "1";
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.style.opacity = "0", 2000);
+  }
+
+  function buildSimilar(film) {
+    const sec = document.getElementById("similarSection");
+    if (!sec) return;
+    const similar = FILMS.filter(f =>
+      f.id !== film.id && f.badge === film.badge
+    ).sort((a, b) => b.qi - a.qi).slice(0, 3);
+    if (similar.length === 0) { sec.innerHTML = ""; return; }
+    sec.innerHTML = '<div class="similar-title">BENZER İÇERİKLER</div>' +
+      '<div class="similar-grid">' +
+      similar.map(f =>
+        '<div class="similar-card" onclick="openDetail(FILMS.find(x=>x.id===' + f.id + '))">' +
+          '<div class="similar-card-title">' + f.title + '</div>' +
+          '<div class="similar-card-year">' + f.year + '</div>' +
+        '</div>'
+      ).join("") +
+      '</div>';
+  }
+
+  function closeDetailOutside(e) {
+    if (e.target === document.getElementById("detailPanel")) closeDetail();
+  }
+
+  // ── VIDEO ──
+  function playCurrentVideo(season, episode) {
+    if (!currentFilm) return;
+    const isTv = currentFilm.type === "dizi";
+    const embedId = currentFilm.imdbId 
+      ? "imdb=" + currentFilm.imdbId 
+      : "tmdb=" + currentFilm.id;
+    let embedUrl;
+    if (isTv) {
+      const s = season || 1;
+      const e = episode || 1;
+      embedUrl = "https://vidsrc-embed.ru/embed/tv?" + embedId + "&season=" + s + "&episode=" + e;
+    } else {
+      embedUrl = "https://vidsrc-embed.ru/embed/movie?" + embedId + "&autoplay=1";
+    }
+    document.getElementById("videoModalTitle").textContent = currentFilm.title + (isTv ? " S" + (season||1) + "E" + (episode||1) : "");
+    document.getElementById("videoFrame").src = embedUrl;
+    closeDetail();
+    closeTvPanel();
+    document.getElementById("videoModal").classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function checkVideoLoad(iframe) {
+    // Can't detect cross-origin iframe content, but we can listen for messages
+    setTimeout(() => {
+      try {
+        const doc = iframe.contentDocument || iframe.contentWindow?.document;
+        if (doc && doc.body && doc.body.innerText.includes("unavailable")) {
+          document.getElementById("videoUnavailable").style.display = "flex";
+          iframe.style.display = "none";
+        }
+      } catch(e) { /* cross-origin, ignore */ }
+    }, 3000);
+  }
+
+  window.addEventListener("message", function(e) {
+    if (e.data && (e.data.type === "unavailable" || (typeof e.data === "string" && e.data.includes("unavailable")))) {
+      document.getElementById("videoUnavailable").style.display = "flex";
+      document.getElementById("videoFrame").style.display = "none";
+    }
+  });
+
+  // ── HAKKINDA ──
+  function openAbout() {
+    const modal = document.getElementById("aboutModal");
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+    // Stats
+    const films = FILMS.filter(f => (f.type||"film") === "film").length;
+    const series = FILMS.filter(f => f.type === "dizi").length;
+    const countries = new Set(FILMS.map(f => f.country)).size;
+    document.getElementById("statFilms").textContent = films;
+    document.getElementById("statSeries").textContent = series;
+    document.getElementById("statCountries").textContent = countries;
+  }
+  function closeAbout() {
+    document.getElementById("aboutModal").classList.remove("open");
+    document.body.style.overflow = "";
+  }
+  function closeAboutOutside(e) {
+    if (e.target === document.getElementById("aboutModal")) closeAbout();
+  }
+
+  // ── FİLM İSTE ──
+  function openRequest() {
+    document.getElementById("requestModal").classList.add("open");
+    document.getElementById("requestSent").style.display = "none";
+    document.getElementById("reqTitle").value = "";
+    document.getElementById("reqYear").value = "";
+    document.getElementById("reqNote").value = "";
+    document.body.style.overflow = "hidden";
+  }
+  function closeRequest() {
+    document.getElementById("requestModal").classList.remove("open");
+    document.body.style.overflow = "";
+  }
+  function closeRequestOutside(e) {
+    if (e.target === document.getElementById("requestModal")) closeRequest();
+  }
+  function submitRequest() {
+    const title = document.getElementById("reqTitle").value.trim();
+    if (!title) { showToast("Film adı zorunlu!"); return; }
+    const year = document.getElementById("reqYear").value.trim();
+    const note = document.getElementById("reqNote").value.trim();
+    // Send via mailto
+    const subject = encodeURIComponent("Film İsteği: " + title);
+    const body = encodeURIComponent("Film/Dizi: " + title + "\nYıl: " + (year||"—") + "\nNot: " + (note||"—"));
+    window.open("mailto:queerflix@proton.me?subject=" + subject + "&body=" + body);
+    document.querySelector(".request-form").style.display = "none";
+    document.getElementById("requestSent").style.display = "block";
+    setTimeout(closeRequest, 3000);
+  }
+
+  function closeVideo() {
+    document.getElementById("videoModal").classList.remove("open");
+    document.getElementById("videoFrame").src = "";
+    document.getElementById("videoFrame").style.display = "block";
+    document.getElementById("videoUnavailable").style.display = "none";
+    document.body.style.overflow = "";
+    currentFilm = null;
+  }
+
+  // ── TV PANELİ ──
+  const TV_SEASONS = {
+    87917: 1,    // It's a Sin
+    72643: 3,    // Pose
+    124834: 3,   // Heartstopper
+    1371: 6,     // The L Word
+    85552: 2,    // Euphoria
+    4395: 2,     // Queer as Folk UK
+    100532: 2,   // Feel Good
+    1398: 7,     // Orange Is the New Black
+    5765: 16,    // RuPaul's Drag Race
+    100882: 4,   // Sex Education
+    61888: 2,    // Sense8
+    54344: 5,    // The Handmaid's Tale
+    301507: 1,   // Heated Rivalry
+  };
+
+  const TV_EPISODES = {
+    87917: [5],
+    72643: [10,10,10],
+    124834: [8,8,8],
+    1371: [14,13,14,12,12,12],
+    85552: [8,8],
+    4395: [8,10],
+    100532: [6,6],
+    1398: [13,13,13,13,13,13,13],
+    5765: Array(16).fill(14),
+    100882: [8,8,8,8],
+    61888: [12,6],
+    54344: [10,13,13,10,10],
+    301507: [6],
+  };
+
+  let currentTvSeason = 1;
+
+  function handlePlayBtn() {
+    if (!currentFilm) return;
+    if (currentFilm.type === "dizi") {
+      openTvPanel();
+    } else {
+      playCurrentVideo();
+    }
+  }
+
+  function openTvPanel() {
+    const film = currentFilm;
+    document.getElementById("tvPanelTitle").textContent = film.title;
+    currentTvSeason = 1;
+    const totalSeasons = TV_SEASONS[film.id] || 1;
+    
+    // Build season tabs
+    const tabs = document.getElementById("tvSeasonTabs");
+    tabs.innerHTML = "";
+    for (let s = 1; s <= totalSeasons; s++) {
+      const btn = document.createElement("button");
+      btn.className = "season-tab" + (s === 1 ? " active" : "");
+      btn.textContent = "Sezon " + s;
+      btn.onclick = () => selectSeason(s);
+      tabs.appendChild(btn);
+    }
+    
+    buildEpisodes(1);
+    document.getElementById("tvPanel").classList.add("open");
+    closeDetail();
+  }
+
+  function selectSeason(s) {
+    currentTvSeason = s;
+    document.querySelectorAll(".season-tab").forEach((btn, i) => {
+      btn.classList.toggle("active", i + 1 === s);
+    });
+    buildEpisodes(s);
+  }
+
+  function buildEpisodes(season) {
+    const epList = TV_EPISODES[currentFilm?.id];
+    const totalEps = epList ? (epList[season - 1] || 10) : 10;
+    const grid = document.getElementById("tvEpisodes");
+    grid.innerHTML = "";
+    for (let e = 1; e <= totalEps; e++) {
+      const btn = document.createElement("button");
+      btn.className = "ep-btn";
+      btn.textContent = e;
+      const ep = e;
+      const s = season;
+      btn.onclick = () => playCurrentVideo(s, ep);
+      grid.appendChild(btn);
+    }
+  }
+
+  function closeTvPanel() {
+    document.getElementById("tvPanel").classList.remove("open");
+  }
+
+  function closeTvPanelOutside(e) {
+    if (e.target === document.getElementById("tvPanel")) closeTvPanel();
+  }
+
+  // ── SEARCH ──
+  function openSearch() {
+    document.getElementById("searchOverlay").classList.add("open");
+    document.getElementById("searchInput").focus();
+    document.getElementById("searchInput").value = "";
+    document.getElementById("searchResults").innerHTML = "";
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeSearch() {
+    document.getElementById("searchOverlay").classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  function doSearch(q) {
+    const results = document.getElementById("searchResults");
+    if (!q.trim()) { results.innerHTML = ""; return; }
+    const found = FILMS.filter(f =>
+      f.title.toLowerCase().includes(q.toLowerCase()) ||
+      f.badge.toLowerCase().includes(q.toLowerCase()) ||
+      f.country.toLowerCase().includes(q.toLowerCase())
+    );
+    if (!found.length) {
+      results.innerHTML = '<div class="no-results">Sonuç bulunamadı</div>';
+      return;
+    }
+    results.innerHTML = "";
+    found.forEach(film => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.style.aspectRatio = "2/3";
+      card.onclick = () => { closeSearch(); openDetail(film); };
+      const poster = posters[film.id];
+      const badgeColor = BADGE_COLORS[film.badge] || "#e91e8c";
+      const bgColor = {"Gay":"#3a0820","Lezbiyen":"#1a0a3a","Trans":"#0a2a2a","Biseksüel":"#1a0a2a","Queer":"#2a1500","Belgesel":"#0a2a0a","Türk Yapımı":"#3a0820"}[film.badge]||"#141414";
+      card.innerHTML =
+        '<div class="card-bg" style="background:' + bgColor + '">' +
+          (poster ? '<img class="card-poster" src="' + IMG_BASE + poster + '" alt="' + film.title + '">' : film.title) +
+        '</div>' +
+        '<div class="card-badge" style="background:' + badgeColor + '">' + film.badge + '</div>' +
+        '<div class="card-overlay" style="opacity:1">' +
+          '<div class="card-title">' + film.title + '</div>' +
+          '<div class="card-year">' + film.year + '</div>' +
+        '</div>';
+      results.appendChild(card);
+    });
+  }
+
+  // ── TMDB POSTERLERİ ──
+  async function loadPosters() {
+    if (!TMDB_KEY) return;
+    const promises = FILMS.map(film => {
+      const isDizi = (film.type || "film") === "dizi";
+      const endpoint = isDizi
+        ? "https://api.themoviedb.org/3/search/tv?api_key=" + TMDB_KEY + "&query=" + encodeURIComponent(film.title) + "&first_air_date_year=" + film.year
+        : "https://api.themoviedb.org/3/search/movie?api_key=" + TMDB_KEY + "&query=" + encodeURIComponent(film.title) + "&year=" + film.year;
+      
+      return fetch(endpoint)
+        .then(r => r.json())
+        .then(d => {
+          const results = d.results || [];
+          const titleKey = isDizi ? "name" : "title";
+          const match = results.find(r => {
+            const a = (r[titleKey] || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+            const b = film.title.toLowerCase().replace(/[^a-z0-9]/g, "");
+            return a === b || a.includes(b) || b.includes(a);
+          }) || results[0];
+          if (match) {
+            if (match.poster_path) posters[film.id] = match.poster_path;
+            if (match.backdrop_path) backdrops[film.id] = match.backdrop_path;
+          }
+        })
+        .catch(() => {});
+    });
+    await Promise.allSettled(promises);
+    buildCards(getFiltered());
+    buildHero();
+  }
+
+  // ── NAV SCROLL ──
+  window.addEventListener("scroll", () => {
+    document.getElementById("nav").classList.toggle("scrolled", window.scrollY > 20);
+  });
+
+  // ── ESC ──
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") { closeSearch(); closeDetail(); closeVideo(); }
+  });
+
+  // ── HERO SLIDER ──
+  const HERO_FILMS = [
+    FILMS.find(f => f.id === 376867), // Moonlight
+    FILMS.find(f => f.id === 426426), // Portrait of a Lady on Fire
+    FILMS.find(f => f.id === 142),    // Brokeback Mountain
+    FILMS.find(f => f.id === 258480), // Carol
+    FILMS.find(f => f.id === 290098), // The Handmaiden
+    FILMS.find(f => f.id === 64686),  // Weekend
+  ].filter(Boolean);
+
+  let heroIndex = 0;
+  let heroTimer = null;
+
+  function buildHero() {
+    const slidesEl = document.getElementById("heroSlides");
+    const dotsEl = document.getElementById("heroDots");
+    slidesEl.innerHTML = "";
+    dotsEl.innerHTML = "";
+
+    HERO_FILMS.forEach((film, i) => {
+      const slide = document.createElement("div");
+      slide.className = "hero-slide" + (i === 0 ? " active" : "");
+      const poster = posters[film.id];
+      const backdrop = backdrops[film.id];
+      if (backdrop) {
+        slide.style.backgroundImage = "url(https://image.tmdb.org/t/p/w1280" + backdrop + ")";
+        slide.style.backgroundPosition = "center center";
+        slide.style.backgroundSize = "cover";
+      } else if (poster) {
+        slide.style.backgroundImage = "url(https://image.tmdb.org/t/p/w780" + poster + ")";
+        slide.style.backgroundPosition = "center 20%";
+        slide.style.backgroundSize = "cover";
+      } else {
+        const colors = {"Gay":"#3a0820,#1a0030","Lezbiyen":"#1a0a3a,#0a0020","Trans":"#0a2a2a,#001a2a","Biseksüel":"#1a0a2a,#0a0018","Queer":"#2a1500,#1a0a00","Belgesel":"#0a2a0a,#001800"};
+        const c = (colors[film.badge] || "1a0a1a,0a0a1a").split(",");
+        slide.style.background = "linear-gradient(135deg, #" + c[0] + ", #" + c[1] + ")";
+      }
+      slidesEl.appendChild(slide);
+
+      const dot = document.createElement("div");
+      dot.className = "hero-dot" + (i === 0 ? " active" : "");
+      dot.onclick = () => goToSlide(i);
+      dotsEl.appendChild(dot);
+    });
+
+    updateHeroContent(0);
+    startHeroTimer();
+  }
+
+  function safeUpper(str) {
+    // Uppercase without Turkish i->İ problem
+    return str.replace(/i/g, "\u0131").toUpperCase().replace(/\u0130/g, "I").replace(/I\u0307/g, "I");
+  }
+
+  function updateHeroContent(i) {
+    const film = HERO_FILMS[i];
+    if (!film) return;
+    document.getElementById("heroTag").textContent = film.badge + " · " + film.country + " · " + film.year;
+    document.getElementById("heroTitle").textContent = film.title;
+    document.getElementById("heroDesc").textContent = film.desc;
+    document.getElementById("heroBtnPlay").classList.remove("hidden");
+  }
+
+  function goToSlide(i) {
+    const slides = document.querySelectorAll(".hero-slide");
+    const dots = document.querySelectorAll(".hero-dot");
+    slides[heroIndex].classList.remove("active");
+    dots[heroIndex].classList.remove("active");
+    heroIndex = (i + HERO_FILMS.length) % HERO_FILMS.length;
+    slides[heroIndex].classList.add("active");
+    dots[heroIndex].classList.add("active");
+    updateHeroContent(heroIndex);
+    resetHeroTimer();
+  }
+
+  function slideHero(dir) { goToSlide(heroIndex + dir); }
+
+  function startHeroTimer() {
+    heroTimer = setInterval(() => goToSlide(heroIndex + 1), 5000);
+  }
+
+  function resetHeroTimer() {
+    clearInterval(heroTimer);
+    startHeroTimer();
+  }
+
+  function playHeroFilm() {
+    const film = HERO_FILMS[heroIndex];
+    if (film) { currentFilm = film; playCurrentVideo(); }
+  }
+
+  function infoHeroFilm() {
+    const film = HERO_FILMS[heroIndex];
+    if (film) openDetail(film);
+  }
+
+  function buildNewSection() {
+    const grid = document.getElementById("newSectionGrid");
+    if (!grid) return;
+    // Show last 10 items (most recently added = end of array)
+    const recent = [...FILMS].reverse().slice(0, 10);
+    grid.innerHTML = recent.map(film => {
+      const poster = posters[film.id];
+      const posterHtml = poster
+        ? '<img src="' + IMG_BASE + poster + '" alt="' + film.title + '" loading="lazy">'
+        : '<span>' + film.title + '</span>';
+      const badgeColor = BADGE_COLORS[film.badge] || "#e91e8c";
+      return '<div class="new-card" onclick="openDetail(FILMS.find(x=>x.id===' + film.id + '))">' +
+        '<div class="new-card-poster">' + posterHtml + '</div>' +
+        '<div class="new-card-title">' + film.title + '</div>' +
+        '<div class="new-card-badge" style="color:' + badgeColor + '">' + film.badge + '</div>' +
+        '</div>';
+    }).join("");
+  }
+
+  // ── İNİT ──
+  buildCards(FILMS);
+  buildHero();
+  buildNewSection();
+  updateFavBadge();
+  if (TMDB_KEY) loadPosters().then(() => { buildHero(); buildNewSection(); });
+</script>
+<!-- HAKKINDA MODAL -->
+<div class="about-modal" id="aboutModal" onclick="closeAboutOutside(event)">
+  <div class="about-box">
+    <button class="about-close" onclick="closeAbout()">×</button>
+    <div class="about-logo">QUEERFLIX</div>
+    <div class="about-tagline">Queer Sinemanın Türkçe Arşivi</div>
+    <div class="about-body">
+      <p>Kult, LGBTQ+ film ve dizilerini Türkçe olarak keşfetmek isteyenler için bağımsız bir arşiv projesidir. Gayrimainstream queer hikayelerden Oscar ödüllü klasiklere kadar geniş bir yelpazede içerik sunar.</p>
+      <p>Site, herhangi bir kurumsal bağlantısı olmayan gönüllü bir ekip tarafından sevgiyle hazırlanmaktadır. Tüm içerikler üçüncü taraf kaynaklardan sunulmaktadır.</p>
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="about-stat-num" id="statFilms">—</div>
+          <div class="about-stat-label">Film</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num" id="statSeries">—</div>
+          <div class="about-stat-label">Dizi</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num" id="statCountries">—</div>
+          <div class="about-stat-label">Ülke</div>
+        </div>
+      </div>
+      <div class="about-categories">
+        <span class="about-cat" style="background:#e91e8c">Gay</span>
+        <span class="about-cat" style="background:#7c4dff">Lezbiyen</span>
+        <span class="about-cat" style="background:#00bcd4">Trans</span>
+        <span class="about-cat" style="background:#9c27b0">Biseksüel</span>
+        <span class="about-cat" style="background:#ff9800">Queer</span>
+        <span class="about-cat" style="background:#4caf50">Belgesel</span>
+        <span class="about-cat" style="background:#e50914">Türk Yapımı</span>
+      </div>
+      <p class="about-contact">İletişim için: <a href="/cdn-cgi/l/email-protection#a3c8d6cfd7c5cacfcee3d3d1ccd7cccd8dcec6"><span class="__cf_email__" data-cfemail="305b455c4456595c5d7040425f445f5e1e5d55">[email&#160;protected]</span></a></p>
+    </div>
+  </div>
+</div>
+
+<!-- FİLM İSTE MODAL -->
+<div class="request-modal" id="requestModal" onclick="closeRequestOutside(event)">
+  <div class="request-box">
+    <button class="about-close" onclick="closeRequest()">×</button>
+    <div class="request-title">Film / Dizi İste</div>
+    <div class="request-sub">Arşivde görmek istediğin bir queer film veya dizi mi var? Bize ilet.</div>
+    <div class="request-form">
+      <input class="request-input" id="reqTitle" type="text" placeholder="Film / Dizi Adı *">
+      <input class="request-input" id="reqYear" type="text" placeholder="Yıl (isteğe bağlı)">
+      <input class="request-input" id="reqNote" type="text" placeholder="Not (isteğe bağlı)">
+      <button class="request-submit" onclick="submitRequest()">Gönder</button>
+    </div>
+    <div class="request-sent" id="requestSent" style="display:none">
+      <div style="font-size:36px;margin-bottom:12px">✓</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;margin-bottom:8px">Teşekkürler!</div>
+      <div style="font-size:13px;color:var(--muted)">İsteğin alındı. En kısa sürede değerlendireceğiz.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAVORİLER BUTONU -->
+<div class="fav-count-badge" id="favBadge" onclick="openFavModal()">★</div>
+
+<!-- FAVORİLER MODAL -->
+<div class="fav-modal" id="favModal" onclick="closeFavModalOutside(event)">
+  <div class="fav-box">
+    <button class="about-close" onclick="closeFavModal()">×</button>
+    <div class="fav-title">★ FAVORİLERİM</div>
+    <div class="fav-list" id="favList"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">QUEERFLIX</div>
+    <p class="footer-desc">Queer sinemanın Türkçe arşivi. LGBTQ+ film ve dizileri keşfet, izle, paylaş.</p>
+    <div class="footer-links">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Yukarı Çık</a>
+      <span>·</span>
+      <a href="/cdn-cgi/l/email-protection#9bf0eef7effdf2f7f6dbebe9f4eff4f5b5f6fe">İletişim</a>
+      <span>·</span>
+      <span>queerflix.online</span>
+    </div>
+    <p class="footer-legal">Bu site bağımsız bir arşiv projesidir. Tüm içerikler üçüncü taraf kaynaklardan sunulmaktadır.</p>
+  </div>
+</footer>
+</body>
+</html>
