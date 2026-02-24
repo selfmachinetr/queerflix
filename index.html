@@ -187,8 +187,9 @@
 
   /* ── HERO ── */
   .hero {
-    height: 80vh;
-    min-height: 400px;
+    height: 85vh;
+    min-height: 500px;
+    max-height: 800px;
     position: relative;
     display: flex;
     align-items: flex-end;
@@ -208,9 +209,14 @@
 
   .hero-gradient {
     position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 60%;
-    background: linear-gradient(to top, var(--bg), transparent);
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      var(--bg) 0%,
+      rgba(0,0,0,0.6) 40%,
+      rgba(0,0,0,0.2) 70%,
+      transparent 100%
+    );
   }
 
   .hero-content {
@@ -1378,7 +1384,7 @@
     <span class="video-title" id="videoModalTitle"></span>
     <button class="video-close" onclick="closeVideo()">×</button>
   </div>
-  <iframe class="video-frame" id="videoFrame" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+  <iframe class="video-frame" id="videoFrame" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media; fullscreen"></iframe>
 </div>
 
 <style>
@@ -1501,7 +1507,6 @@
     { type: "film", id: 13061,  title: "Velvet Goldmine", imdbId: "tt0120879",                  badge: "Biseksüel", year: 1998, country: "ABD",      desc: "1970'lerin glam rock dünyasında biseksüel bir rock yıldızının hikayesi.", qi: 5, videoUrl: "" },
     { type: "film", id: 4348,   title: "Transamerica", imdbId: "tt0407265",                     badge: "Trans",     year: 2005, country: "ABD",      desc: "Ameliyat öncesinde kaybolan oğlunu bulmak zorunda kalan trans bir kadının yolculuğu.", qi: 5, videoUrl: "" },
     { type: "film", id: 458131, title: "Bros", imdbId: "tt14571278",                             badge: "Gay",       year: 2022, country: "ABD",      desc: "Hollywood'un ilk büyük stüdyo gay romantik komedisi.", qi: 4, videoUrl: "" },
-    { type: "film", id: 479529, title: "Love Simon", imdbId: "tt5164432",                       badge: "Gay",       year: 2018, country: "ABD",      desc: "Lise öğrencisi Simon'ın kimliğini açıklama sürecini anlatan sıcak film.", qi: 4, videoUrl: "" },
     { type: "film", id: 9593,   title: "The Birdcage", imdbId: "tt0115742",                     badge: "Gay",       year: 1996, country: "ABD",      desc: "Robin Williams ve Nathan Lane'li, eşcinsel bir çiftin oğullarının düğününde yaşanan efsanevi komedi.", qi: 4, videoUrl: "" },
     { type: "film", id: 9928,   title: "Far from Heaven", imdbId: "tt0297534",                  badge: "Gay",       year: 2002, country: "ABD",      desc: "1950'ler Amerika'sının arkasındaki gerçekleri gösteren Todd Haynes melodramı.", qi: 4, videoUrl: "" },
     { type: "film", id: 829799, title: "Bottoms", imdbId: "tt21823606",                          badge: "Lezbiyen",  year: 2023, country: "ABD",      desc: "İki lezbiyen liseli kızın kaos dolu dövüş kulübü kurmaya çalıştığı komedi.", qi: 4, videoUrl: "" },
@@ -1557,6 +1562,104 @@
     { type: "film", id: 83879,  title: "How to Survive a Plague", imdbId: "tt2124189", badge: "Belgesel", year: 2012, country: "ABD", desc: "AIDS krizinde ACT UP aktivistlerinin ilaç erişimi için verdikleri tarihi mücadeleyi belgeleyen Oscar adayı film.", qi: 5, videoUrl: "" },
     { type: "film", id: 742653, title: "Disclosure", imdbId: "tt11038710", badge: "Belgesel", year: 2020, country: "ABD", desc: "Laverne Cox'un sunduğu, Hollywood'da trans temsili ve medyanın trans kimlikler üzerindeki etkisini inceleyen Netflix belgese.", qi: 5, videoUrl: "" },
     { type: "film", id: 736261, title: "Flee", imdbId: "tt12376798", badge: "Belgesel", year: 2021, country: "Danimarka", desc: "Afganistan'dan kaçan eşcinsel bir mültecinin animasyon ve belgesel karışımıyla anlatılan güçlü ve kişisel hikayesi.", qi: 5, videoUrl: "" },
+    // ── Yeni Eklemeler ──
+    // ABD - Yeni
+    { type: "film", id: 381288,  title: "Love, Simon", imdbId: "tt5164432",             badge: "Gay",       year: 2018, country: "ABD",      desc: "Lise öğrencisi Simon'ın kimliğini açıklama sürecini anlatan sıcak film.", qi: 4, videoUrl: "" },
+    { type: "film", id: 522938,  title: "Rocketman", imdbId: "tt2066051",              badge: "Gay",       year: 2019, country: "İngiltere", desc: "Elton John'un müzikal biyografisi, eşcinsel kimliğini ve bağımlılıklarını açıkça ele alıyor.", qi: 5, videoUrl: "" },
+    { type: "film", id: 615643,  title: "The Half of It", imdbId: "tt9683478",         badge: "Lezbiyen",  year: 2020, country: "ABD",      desc: "Çekingen Çin asıllı bir kızın yazdığı aşk mektuplarının beklenmedik bir üçgene dönüştüğü tatlı film.", qi: 4, videoUrl: "" },
+    { type: "film", id: 648579,  title: "Dating Amber", imdbId: "tt9764362",           badge: "Gay",       year: 2020, country: "İrlanda",  desc: "1990'lar İrlanda'sında iki eşcinsel genç, ailelerini oyalamak için sahte ilişki kurar.", qi: 4, videoUrl: "" },
+    { type: "film", id: 723972,  title: "Good Grief", imdbId: "tt15399852",            badge: "Gay",       year: 2023, country: "İngiltere", desc: "Dan Levy'nin yazdığı ve yönettiği, eşini kaybeden bir adamın Paris'te kendini yeniden keşfettiği drama.", qi: 4, videoUrl: "" },
+    { type: "film", id: 786892,  title: "All of Us Strangers", imdbId: "tt21192512",   badge: "Gay",       year: 2023, country: "İngiltere", desc: "Andrew Scott ve Paul Mescal'ın başrolde olduğu, çocukluğa dönüş ve yeni aşkı anlatan yürek yakan drama.", qi: 5, videoUrl: "" },
+    { type: "film", id: 945961,  title: "Femme", imdbId: "tt13966690",                badge: "Gay",       year: 2023, country: "İngiltere", desc: "Saldırıya uğrayan bir drag sanatçısının failiyle beklenmedik bir ilişki kurduğu gerilimli İngiliz filmi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 955916,  title: "Love Lies Bleeding", imdbId: "tt21064584",   badge: "Lezbiyen",  year: 2024, country: "ABD",      desc: "Kristen Stewart'ın başrolde olduğu neo-noir lezbiyen gerilim filmi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 1084199, title: "Queer", imdbId: "tt17024450",                badge: "Gay",       year: 2024, country: "İtalya",   desc: "Luca Guadagnino'nun Daniel Craig ile çektiği, William Burroughs romanından uyarlanan queer aşk filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 456789,  title: "I Saw the TV Glow", imdbId: "tt21060842",    badge: "Queer",     year: 2024, country: "ABD",      desc: "Trans deneyimi metaforik biçimde işleyen, iki gencin bir TV dizisine olan takıntısını anlatan queer korku filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 370755,  title: "Girl", imdbId: "tt7413982",                  badge: "Trans",     year: 2018, country: "Belçika",  desc: "Balerina olmak isteyen trans bir genç kızın bedenini ve kimliğini aşmaya çalıştığı Belçika filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 501158,  title: "Lingua Franca", imdbId: "tt8743926",         badge: "Trans",     year: 2019, country: "ABD",      desc: "New York'ta belgesiz trans Filipinli bir kadının hayatta kalma mücadelesi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 508947,  title: "Supernova", imdbId: "tt9660502",             badge: "Gay",       year: 2020, country: "İngiltere", desc: "Colin Firth ve Stanley Tucci'nin eşcinsel bir çifti canlandırdığı, demans ve sevgiye dair dokunaklı drama.", qi: 5, videoUrl: "" },
+    { type: "film", id: 626332,  title: "Swan Song", imdbId: "tt11271038",            badge: "Gay",       year: 2021, country: "ABD",      desc: "Udo Kier'ın başrolde olduğu, yaşlı eşcinsel bir kuaförün son yolculuğunu anlatan naif ve güzel film.", qi: 4, videoUrl: "" },
+    { type: "film", id: 674955,  title: "On the Count of Three", imdbId: "tt10655442",badge: "Queer",     year: 2021, country: "ABD",      desc: "Aziz Ansari yönetiminde Jerrod Carmichael'ın başrolde olduğu, varoluşsal kara komedi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 560144,  title: "Farewell Amor", imdbId: "tt9484544",         badge: "Queer",     year: 2020, country: "ABD",      desc: "17 yıl ayrı kalan bir Angolalı ailenin Brooklyn'de yeniden bir araya gelmesini anlatan dokunaklı film.", qi: 4, videoUrl: "" },
+    { type: "film", id: 740985,  title: "Spoiler Alert", imdbId: "tt13186482",        badge: "Gay",       year: 2022, country: "ABD",      desc: "Jim Parsons'ın eşcinsel bir çiftin hastalık ve sevgi hikayesini anlatan gerçek hayat biyografisi.", qi: 4, videoUrl: "" },
+    // Yeni Diziler
+    { type: "dizi", id: 85552,   title: "Young Royals", imdbId: "tt14661024",         badge: "Gay",       year: 2021, country: "İsveç",    desc: "İsveç kraliyet ailesinin genç prensi Wilhelm'in elit bir yatılı okulda yaşadığı yasak aşkı anlatan Netflix dizisi.", qi: 5, videoUrl: "" },
+    { type: "dizi", id: 93405,   title: "Elite", imdbId: "tt7134496",                 badge: "Gay",       year: 2018, country: "İspanya",  desc: "İspanyol elit lisesinde cinsellik, kimlik ve gerilimi harmanlayan popüler Netflix gençlik dizisi.", qi: 4, videoUrl: "" },
+    { type: "dizi", id: 108978,  title: "Interview with the Vampire", imdbId: "tt14164730", badge: "Gay",  year: 2022, country: "ABD",     desc: "Anne Rice klasiğinin queer aşkı açıkça ön plana çıkaran AMC uyarlaması.", qi: 5, videoUrl: "" },
+    { type: "dizi", id: 100110,  title: "The Politician", imdbId: "tt7971476",        badge: "Biseksüel", year: 2019, country: "ABD",      desc: "Ryan Murphy'nin biseksüel karakterlere geniş yer verdiği siyasi hiciv dizisi.", qi: 3, videoUrl: "" },
+    { type: "dizi", id: 95411,   title: "Schitt's Creek", imdbId: "tt3526078",        badge: "Biseksüel", year: 2015, country: "Kanada",   desc: "David Rose'un biseksüelliğini normalleştiren ve ödüllü olmayı hak eden kültleşmiş aile komedisi.", qi: 5, videoUrl: "" },
+
+    // ── GAY FİLMLER - ULUSLARARASI ──
+    { type: "film", id: 338952,  title: "Beach Rats",              imdbId: "tt5460526",  badge: "Gay",       year: 2017, country: "ABD",       desc: "Brooklyn'de kimliğiyle boğuşan bir gencin gece hayatını ve gizli isteklerini anlatan gözüpek drama.", qi: 4, videoUrl: "" },
+    { type: "film", id: 420814,  title: "The Wound",               imdbId: "tt5599606",  badge: "Gay",       year: 2017, country: "G.Afrika",   desc: "Güney Afrika Xhosa topluluğunda gizli eşcinsel bir ilişkiyi cesurca ele alan festival filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 458156,  title: "Sauvages",                imdbId: "tt6166392",  badge: "Gay",       year: 2017, country: "Fransa",     desc: "Fransa'da iki genç erkeğin anlık ve tutkulu ilişkisini anlatan sıcak yaz filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 484737,  title: "Knife+Heart",             imdbId: "tt6458566",  badge: "Gay",       year: 2018, country: "Fransa",     desc: "70'ler Paris gay porno endüstrisini gizemli bir cinayetle harmanlayan stilize Fransız filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 553604,  title: "Driveways",               imdbId: "tt8005374",  badge: "Queer",     year: 2019, country: "ABD",       desc: "Ödüllü bağımsız film; farklı geçmişlerden iki yabancının sıcak komşuluk hikayesi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 610153,  title: "Sublet",                  imdbId: "tt10999160", badge: "Gay",       year: 2020, country: "İsrail",    desc: "Tel Aviv'de kısa süreliğine ev kiralayan yaşlı New Yorklu gazetecinin genç ev sahibiyle ilişkisi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 632067,  title: "Firebird",                imdbId: "tt11207412", badge: "Gay",       year: 2021, country: "Estonya",   desc: "Sovyet askeri üssünde iki erkeğin yasak ve tehlikeli aşkını anlatan gerçek hikaye.", qi: 5, videoUrl: "" },
+    { type: "film", id: 644930,  title: "Cicada",                  imdbId: "tt12012650", badge: "Gay",       year: 2020, country: "ABD",       desc: "Matthew Fifer'ın kendi deneyiminden uyarladığı, New York'ta iki erkeğin kırılgan aşk hikayesi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 680792,  title: "Clapback",                imdbId: "tt14039014", badge: "Gay",       year: 2021, country: "ABD",       desc: "Siyah queer bir gencin kültürel kimliği ve aşkla yüzleştiği bağımsız drama.", qi: 3, videoUrl: "" },
+    { type: "film", id: 700785,  title: "Mutzenbacher",            imdbId: "tt14842148", badge: "Gay",       year: 2022, country: "Avusturya", desc: "Viyana'nın erotik kültürel mirasını sorgulayan, belgesel ve kurmacayı harmanlayan deneysel film.", qi: 4, videoUrl: "" },
+    { type: "film", id: 711928,  title: "Huesera",                 imdbId: "tt15260380", badge: "Lezbiyen",  year: 2022, country: "Meksika",   desc: "Annelik baskısı altındaki queer bir kadının korkuyu ve kimliği yüzleştiği Meksika korku filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 724495,  title: "Corsage",                 imdbId: "tt14196714", badge: "Queer",     year: 2022, country: "Avusturya", desc: "Kraliçe Sissi'nin hayatını feminist ve queer bir bakışla yeniden yazan Avusturya filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 756999,  title: "Leonor Will Never Die",   imdbId: "tt15772930", badge: "Queer",     year: 2022, country: "Filipinler",desc: "Filipinli yaşlı bir kadın sinemacının kendi filmine girip ölüm ve yaşamı sorgulaması.", qi: 4, videoUrl: "" },
+    { type: "film", id: 792293,  title: "Sebastian",               imdbId: "tt16426380", badge: "Gay",       year: 2024, country: "İngiltere", desc: "Gece hayatında erkek seks işçileriyle karşılaşarak kendini arayan bir yazarın yoğun hikayesi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 808009,  title: "Jonah",                   imdbId: "tt14803516", badge: "Gay",       year: 2021, country: "İsrail",    desc: "Savaş sonrası PTSD ile mücadele eden genç bir İsrailli askerin queer yolculuğu.", qi: 4, videoUrl: "" },
+    { type: "film", id: 884779,  title: "The Territory",           imdbId: "tt19780382", badge: "Queer",     year: 2022, country: "Danimarka", desc: "Belgesel: Amazon yerlilerinin topraklarını koruma mücadelesi ve queer aktivizm.", qi: 4, videoUrl: "" },
+    { type: "film", id: 941169,  title: "A Little Prayer",         imdbId: "tt23157312", badge: "Queer",     year: 2023, country: "ABD",       desc: "Bir ailenin yıkılma sürecini ve genç evli oğlun kimlik arayışını anlatan Sundance ödüllü film.", qi: 4, videoUrl: "" },
+    { type: "film", id: 972640,  title: "The Feeling That the Time for Doing Something Has Passed", imdbId: "tt14723128", badge: "Queer", year: 2023, country: "ABD", desc: "Otuz yaşında kendini yeniden tanımlamaya çalışan queer bir kadının minimalist portresi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 991569,  title: "In My Mother's Skin",     imdbId: "tt14798186", badge: "Queer",     year: 2023, country: "Filipinler",desc: "2. Dünya Savaşı sırasında geçen, Filipinli bir ailenin varlıkları ve inkârları üzerine korku filmi.", qi: 3, videoUrl: "" },
+    { type: "film", id: 1014226, title: "The Taste of Things",     imdbId: "tt21454134", badge: "Queer",     year: 2023, country: "Fransa",    desc: "Juliette Binoche ve Benoît Magimel'in başrolde olduğu, yemek ve sessiz aşkı anlatan Fransız filmi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 1034549, title: "Fancy Dance",             imdbId: "tt15687756", badge: "Queer",     year: 2023, country: "ABD",       desc: "Lily Gladstone'un başrolde olduğu, yerli Amerikalı queer bir kadının yeğenini bulma hikayesi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 1048632, title: "Housekeeping for Beginners", imdbId: "tt13481796", badge: "Queer",  year: 2023, country: "Makedonya", desc: "Kuzey Makedonya'da queer bir ailenin çocukları yetiştirme mücadelesini anlatan sıcak film.", qi: 4, videoUrl: "" },
+
+    // ── LEZBİYEN FİLMLER ──
+    { type: "film", id: 329548,  title: "The Duke of Burgundy",    imdbId: "tt3048794",  badge: "Lezbiyen",  year: 2014, country: "İngiltere", desc: "İki kadın arasındaki güç oyunlarını erotik ve sanatsal bir biçimde inceleyen İngiliz film.", qi: 5, videoUrl: "" },
+    { type: "film", id: 372058,  title: "When the Night Is Falling", imdbId: "tt0115017", badge: "Lezbiyen", year: 1995, country: "Kanada",    desc: "Kanadalı bir ilahiyat öğretmeninin sirk sanatçısına duyduğu beklenmedik aşkı anlatan romantik film.", qi: 4, videoUrl: "" },
+    { type: "film", id: 398978,  title: "Disobedience",            imdbId: "tt5795028",  badge: "Lezbiyen",  year: 2017, country: "İngiltere", desc: "Ortodoks Yahudi topluluğuna dönen bir kadının eski sevgilisiyle yaşadığı yasak aşkı anlatan drama.", qi: 4, videoUrl: "" },
+    { type: "film", id: 427873,  title: "Vita & Virginia",         imdbId: "tt4655480",  badge: "Lezbiyen",  year: 2018, country: "İngiltere", desc: "Virginia Woolf ile Vita Sackville-West'in gerçek aşkını anlatan biyografik drama.", qi: 4, videoUrl: "" },
+    { type: "film", id: 540425,  title: "Never Rarely Sometimes Always", imdbId: "tt9770150", badge: "Queer", year: 2020, country: "ABD",     desc: "Kürtaj hakkını aramak için New York'a giden iki genç kızın dokunaklı yolculuğu.", qi: 5, videoUrl: "" },
+    { type: "film", id: 567609,  title: "Petite Maman",            imdbId: "tt13143964", badge: "Queer",     year: 2021, country: "Fransa",    desc: "Céline Sciamma'nın sekiz yaşındaki bir kızın annesinin çocukluğunu keşfettiği büyüleyici masalı.", qi: 5, videoUrl: "" },
+    { type: "film", id: 594767,  title: "The Novice",              imdbId: "tt11206770", badge: "Queer",     year: 2021, country: "ABD",       desc: "Üniversite küreğinde kendini aşırı zorlayan queer bir birinci sınıf öğrencisinin gerilimli hikayesi.", qi: 4, videoUrl: "" },
+    { type: "dizi", id: 614934,  title: "Yellowjackets",           imdbId: "tt11041332", badge: "Lezbiyen",  year: 2021, country: "ABD",       desc: "Ormanda mahsur kalan kadın futbol takımının hayatta kalma ve queer hikayesini anlatan dizi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 639720,  title: "The Nightingale",         imdbId: "tt6688814",  badge: "Queer",     year: 2018, country: "Avustralya",desc: "Avustralya'da sömürge döneminde intikam arayan İrlandalı bir kadının sert ve güçlü hikayesi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 663559,  title: "Summerland",              imdbId: "tt10234560", badge: "Lezbiyen",  year: 2020, country: "İngiltere", desc: "2. Dünya Savaşı döneminde münzevi bir kadın yazarın geçmişini ve aşkını yeniden keşfetmesi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 718821,  title: "You Can Live Forever",    imdbId: "tt14317574", badge: "Lezbiyen",  year: 2022, country: "Kanada",    desc: "Jehova'nın Şahitleri topluluğunda büyüyen genç bir kızın yasak lezbiyen aşkını anlatan Kanada filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 745769,  title: "Bottoms",                 imdbId: "tt21234064", badge: "Lezbiyen",  year: 2023, country: "ABD",       desc: "Öz savunma kulübü kurarak amacına ulaşmaya çalışan iki lezbiyen liseli kızın komedi filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 774752,  title: "Cat Person",              imdbId: "tt9549582",  badge: "Queer",     year: 2023, country: "ABD",       desc: "Viral kısa hikayeden uyarlanan, modern flört kültürü ve güç dinamiklerini sorgulayan gerilim.", qi: 3, videoUrl: "" },
+    { type: "film", id: 821090,  title: "If You Were the Last",    imdbId: "tt17278582", badge: "Queer",     year: 2023, country: "ABD",       desc: "Uzayda mahsur kalan iki yabancının arasındaki romantik gerilimi anlatan küçük ama sevimli film.", qi: 3, videoUrl: "" },
+    { type: "film", id: 843906,  title: "Passages",                imdbId: "tt14164830", badge: "Biseksüel", year: 2023, country: "Fransa",    desc: "Biseksüel bir yönetmenin iki ilişki arasında gidip geldiği, Ira Sachs imzalı tartışmalı Fransız film.", qi: 4, videoUrl: "" },
+    { type: "film", id: 890617,  title: "Daddio",                  imdbId: "tt15212326", badge: "Queer",     year: 2023, country: "ABD",       desc: "Dakota Johnson ve Sean Penn'li, takside iki yabancının derin sohbeti üzerine minimalist drama.", qi: 3, videoUrl: "" },
+    { type: "film", id: 1060073, title: "The Wedding Banquet",     imdbId: "tt27829171", badge: "Gay",       year: 2024, country: "ABD",       desc: "Ang Lee'nin 1993 klasiğinin modern uyarlaması, queer Asya-Amerikalı ilişkileri odağında.", qi: 4, videoUrl: "" },
+
+    // ── ASYA / AVRUPA / LATİN AMERİKA ──
+    { type: "film", id: 391374,  title: "Moonlight",               imdbId: "tt6982936",  badge: "Gay",       year: 2016, country: "Tayvan",    desc: "Tayvan'da iki erkek arasındaki yıllara yayılan sessiz ve acı dolu aşk hikayesi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 412363,  title: "BPM (Beats Per Minute)",  imdbId: "tt6225520",  badge: "Gay",       year: 2017, country: "Fransa",    desc: "Paris'te AIDS aktivisti genç gay erkeklerin hikayesini anlatan güçlü ve duygusal Fransız filmi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 468160,  title: "Tramps",                  imdbId: "tt5779196",  badge: "Gay",       year: 2016, country: "ABD",       desc: "New York'ta yanlışlıkla birbirine karışan iki gencin arasında gelişen romantik komedi.", qi: 3, videoUrl: "" },
+    { type: "film", id: 500664,  title: "Sorry Angel",             imdbId: "tt7428656",  badge: "Gay",       year: 2018, country: "Fransa",    desc: "1990'larda AIDS gölgesinde Paris'te iki erkeğin kırılgan ve kısa aşkı, Cannes rekabeti.", qi: 5, videoUrl: "" },
+    { type: "film", id: 531309,  title: "Pacifiction",             imdbId: "tt11416172", badge: "Queer",     year: 2022, country: "Fransa",    desc: "Fransız Polinezyası'nda bir sömürge yetkilisinin kimlik ve siyaset labirenti.", qi: 4, videoUrl: "" },
+    { type: "film", id: 576438,  title: "The Boys from Brazil",    imdbId: "tt0077269",  badge: "Gay",       year: 1978, country: "ABD",       desc: "Klasik sinema dışında konuşulan, queer altmetni olan gerilim filmi.", qi: 3, videoUrl: "" },
+    { type: "film", id: 600354,  title: "Babyteeth",               imdbId: "tt7016936",  badge: "Queer",     year: 2019, country: "Avustralya",desc: "Avustralya'da terminal kanser teşhisi alan genç kızın hayatını altüst eden gençle tanışması.", qi: 4, videoUrl: "" },
+    { type: "film", id: 637988,  title: "Memories of a Burning Body", imdbId: "tt13848842", badge: "Lezbiyen", year: 2023, country: "Kosta Rika", desc: "Üç kadın neslin beden ve arzu hafızasını paylaştığı Kosta Rika filmi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 659498,  title: "Tides",                   imdbId: "tt12621572", badge: "Queer",     year: 2021, country: "Almanya",   desc: "Post-apokaliptik Almanya filminde queer kimlik ve hayatta kalma mücadelesi.", qi: 3, videoUrl: "" },
+    { type: "film", id: 693134,  title: "Son of Monarchs",         imdbId: "tt7888688",  badge: "Queer",     year: 2020, country: "Meksika",   desc: "Meksikalı bir biyologun New York'taki kimlik arayışı ve aile kökleriyle yüzleşmesi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 726259,  title: "Leonor",                  imdbId: "tt14398962", badge: "Lezbiyen",  year: 2022, country: "Brezilya",  desc: "Brezilya'da iki kadın arasındaki aşkı hem coşkuyla hem kederle anlatan romantik drama.", qi: 4, videoUrl: "" },
+    { type: "film", id: 752156,  title: "Sonne",                   imdbId: "tt12155622", badge: "Queer",     year: 2022, country: "Avusturya", desc: "Viyana'da Afganistanlı üç genç kızın TikTok yıldızı olma hayaline tutunduğu drama.", qi: 4, videoUrl: "" },
+    { type: "film", id: 780423,  title: "Joyland",                 imdbId: "tt16363622", badge: "Trans",     year: 2022, country: "Pakistan",  desc: "Pakistan'da evli bir adamın trans bir dansçıya olan yasak aşkını anlatan, Cannes ödüllü film.", qi: 5, videoUrl: "" },
+    { type: "film", id: 816892,  title: "Close",                   imdbId: "tt14408254", badge: "Queer",     year: 2022, country: "Belçika",   desc: "Lukas Dhont'un iki erkek arkadaşlığının kırılmasını anlatan, Oscar adayı Belçika filmi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 861904,  title: "Plan 75",                 imdbId: "tt15415990", badge: "Queer",     year: 2022, country: "Japonya",   desc: "Yaşlıların ölümü seçmesine izin veren Japon distopyasında yaşam ve ölüm üzerine düşünceler.", qi: 4, videoUrl: "" },
+    { type: "film", id: 919207,  title: "Problemista",             imdbId: "tt15649604", badge: "Queer",     year: 2023, country: "ABD",       desc: "Julio Torres'in yazdığı ve oynadığı, queer Latinx bir sanatçının New York hayatta kalma hikayesi.", qi: 4, videoUrl: "" },
+    { type: "film", id: 965150,  title: "La Chimera",              imdbId: "tt18995420", badge: "Queer",     year: 2023, country: "İtalya",    desc: "Alice Rohrwacher'ın sürrealist İtalya'sında bir arkeoloji kaçakçısının aşk ve kayıp hikayesi.", qi: 5, videoUrl: "" },
+    { type: "film", id: 1003596, title: "The Delinquents",         imdbId: "tt17521754", badge: "Queer",     year: 2023, country: "Arjantin",  desc: "Banka soygunu ve özgürlük arayışını anlatan, üç saatlik Arjantin trajikomedisi.", qi: 4, videoUrl: "" },
+
+    // ── YENİ DİZİLER ──
+    { type: "dizi", id: 107113,  title: "Genera+ion",              imdbId: "tt11688170", badge: "Queer",     year: 2021, country: "ABD",       desc: "Lise öğrencilerinin cinsellik ve kimlikle yüzleştiği HBO'nun kısa ama güçlü gençlik dizisi.", qi: 4, videoUrl: "" },
+    { type: "dizi", id: 96677,   title: "Work in Progress",        imdbId: "tt11047464", badge: "Lezbiyen",  year: 2019, country: "ABD",       desc: "Abby McEnany'nin yarattığı, Chicago'da queer bir kadının sevimli ve acı tatlı yaşamı.", qi: 4, videoUrl: "" },
+    { type: "dizi", id: 77904,   title: "Please Like Me",          imdbId: "tt2562938",  badge: "Gay",       year: 2013, country: "Avustralya",desc: "Josh Thomas'ın otobiyografik Avustralya komedisi, eşcinselliği ve ruh sağlığını sıcaklıkla ele alır.", qi: 5, videoUrl: "" },
+    { type: "dizi", id: 120863,  title: "Dead End: Paranormal Park",imdbId: "tt14080560",badge: "Trans",     year: 2022, country: "ABD",       desc: "Trans ve queer karakterlerin doğaüstü bir lunaparktaki macerasını anlatan Netflix animasyon dizisi.", qi: 4, videoUrl: "" },
+    { type: "dizi", id: 129490,  title: "Uncoupled",               imdbId: "tt14888978", badge: "Gay",       year: 2022, country: "ABD",       desc: "Neil Patrick Harris'in 17 yıllık ilişkisi biten bir adamı oynadığı, New York'ta ayrılık sonrası yaşam.", qi: 3, videoUrl: "" },
+    { type: "dizi", id: 103322,  title: "Transparent",             imdbId: "tt3502262",  badge: "Trans",     year: 2014, country: "ABD",       desc: "Yaşlı bir babanın trans kimliğini ailesine açıkladığı, Primetime Emmy ödüllü Amazon dizisi.", qi: 5, videoUrl: "" },
+    { type: "dizi", id: 135157,  title: "Sort Of",                 imdbId: "tt13786888", badge: "Queer",     year: 2021, country: "Kanada",    desc: "Cinsiyet ikili olmayan Pakis-Kanadalı Sabi'nin hayatını anlatan sevecen CBC/HBO Max Kanada dizisi.", qi: 5, videoUrl: "" },
+    { type: "dizi", id: 97180,   title: "Looking",                 imdbId: "tt2737252",  badge: "Gay",       year: 2014, country: "ABD",       desc: "San Francisco'da üç gay erkek arkadaşın gerçekçi aşk ve yaşam hikayelerini anlatan HBO dizisi.", qi: 5, videoUrl: "" },
     // ===== DİZİLER =====
     { type: "dizi", id: 87917,  title: "It's a Sin",           imdbId: "tt9814116", badge: "Gay",      year: 2021, country: "İngiltere", desc: "AIDS krizinin gölgesinde büyüyen genç eşcinsel erkeklerin 1980'ler Londra'sındaki yaşamını anlatan dokunaklı mini dizi.", qi: 5, videoUrl: "" },
     { type: "dizi", id: 72643,  title: "Pose",                  imdbId: "tt7562112", badge: "Trans",    year: 2018, country: "ABD",       desc: "1980'ler New York'unda trans kadınların ve drag sanatçılarının ballroom kültüründeki yaşamlarını anlatan güçlü drama dizisi.", qi: 5, videoUrl: "" },
@@ -1572,7 +1675,6 @@
     { type: "dizi", id: 54344,  title: "The Handmaid's Tale",   imdbId: "tt5834204", badge: "Queer",    year: 2017, country: "ABD",       desc: "Ataerkil bir distopik düzende kadınların mücadelesini anlatan; feminist ve queer temaları güçlü biçimde işleyen dizi.", qi: 4, videoUrl: "" },
     { type: "dizi", id: 301507, title: "Heated Rivalry", imdbId: "tt35495073", badge: "Gay", year: 2025, country: "Kanada", desc: "Rakip hokey takımlarının iki süperstarı, buz pistindeki amansız rekabetleri eşcinsel bir aşka dönüşürken kendilerini ve duygularını keşfeder.", qi: 5, videoUrl: "" },
     // ✏️ YENİ FİLM:
-    // { id: TMDB_ID, title: "Film Adi", badge: "Gay/Lezbiyen/Trans/Biseksüel/Queer/Belgesel/Türk Yapımı", year: 2020, country: "Ulke", desc: "Aciklama.", qi: 1-5, videoUrl: "" },
   ];
 
   const BADGE_COLORS = {
@@ -1920,17 +2022,14 @@
   // ── VIDEO ──
   function playCurrentVideo(season, episode) {
     if (!currentFilm) return;
-    const isTv = currentFilm.type === "dizi";
-    const embedId = currentFilm.imdbId 
-      ? "imdb=" + currentFilm.imdbId 
-      : "tmdb=" + currentFilm.id;
+    const isTv = (currentFilm.type || "film") === "dizi";
     let embedUrl;
     if (isTv) {
       const s = season || 1;
       const e = episode || 1;
-      embedUrl = "https://vidsrc-embed.ru/embed/tv?" + embedId + "&season=" + s + "&episode=" + e;
+      embedUrl = "https://vidlink.pro/tv/" + currentFilm.id + "/" + s + "/" + e;
     } else {
-      embedUrl = "https://vidsrc-embed.ru/embed/movie?" + embedId + "&autoplay=1";
+      embedUrl = "https://vidlink.pro/movie/" + currentFilm.id;
     }
     document.getElementById("videoModalTitle").textContent = currentFilm.title + (isTv ? " S" + (season||1) + "E" + (episode||1) : "");
     document.getElementById("videoFrame").src = embedUrl;
@@ -2035,6 +2134,19 @@
     61888: 2,    // Sense8
     54344: 5,    // The Handmaid's Tale
     301507: 1,   // Heated Rivalry
+    85552: 3,    // Young Royals
+    93405: 7,    // Elite
+    108978: 3,   // Interview with the Vampire
+    100110: 2,   // The Politician
+    95411: 6,    // Schitt's Creek
+    107113: 1,   // Genera+ion
+    96677: 3,    // Work in Progress
+    77904: 5,    // Please Like Me
+    120863: 2,   // Dead End
+    129490: 1,   // Uncoupled
+    103322: 5,   // Transparent
+    135157: 3,   // Sort Of
+    97180: 2,    // Looking
   };
 
   const TV_EPISODES = {
@@ -2051,6 +2163,19 @@
     61888: [12,6],
     54344: [10,13,13,10,10],
     301507: [6],
+    85552: [6,6,6],
+    93405: [8,8,8,8,8,8,8],
+    108978: [7,8,8],
+    100110: [7,7],
+    95411: [10,13,14,14,14,14],
+    107113: [10],
+    96677: [8,8,8],
+    77904: [6,7,7,10,7],
+    120863: [10,10],
+    129490: [8],
+    103322: [10,11,11,10,10],
+    135157: [7,8,8],
+    97180: [8,8],
   };
 
   let currentTvSeason = 1;
