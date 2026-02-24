@@ -85,6 +85,31 @@
   .hero-arrow-left { left: 24px; }
   .hero-arrow-right { right: 24px; }
 
+  .hero-scroll-down {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    animation: bounce 2s infinite;
+    transition: background 0.2s;
+  }
+  .hero-scroll-down:hover { background: rgba(255,255,255,0.25); }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
   .hero-dots {
     position: absolute;
     bottom: 20px;
@@ -1020,7 +1045,32 @@
     .hero-arrow { width: 36px; height: 36px; font-size: 18px; }
     .hero-arrow-left { left: 8px; }
     .hero-arrow-right { right: 8px; }
-    .hero-dots { right: 16px; bottom: 12px; }
+    .hero-scroll-down {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    animation: bounce 2s infinite;
+    transition: background 0.2s;
+  }
+  .hero-scroll-down:hover { background: rgba(255,255,255,0.25); }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  .hero-dots { right: 16px; bottom: 12px; }
     .hero-actions { gap: 8px; }
     .hero-btn-play, .hero-btn-info { padding: 8px 16px; font-size: 13px; }
     .detail-box { width: 95%; }
@@ -1272,6 +1322,9 @@
   <div class="hero-dots" id="heroDots"></div>
   <button class="hero-arrow hero-arrow-left" onclick="slideHero(-1)">&#8249;</button>
   <button class="hero-arrow hero-arrow-right" onclick="slideHero(1)">&#8250;</button>
+  <button class="hero-scroll-down" onclick="document.getElementById('filters').scrollIntoView({behavior:'smooth'})" title="Aşağı Kaydır">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
 </div>
 
 <!-- FILTERS -->
@@ -2320,6 +2373,7 @@
     await Promise.allSettled(promises);
     buildCards(getFiltered());
     buildHero();
+    buildNewSection();
   }
 
   // ── NAV SCROLL ──
@@ -2334,12 +2388,14 @@
 
   // ── HERO SLIDER ──
   const HERO_FILMS = [
+    FILMS.find(f => f.id === 301507), // Heated Rivalry
+    FILMS.find(f => f.id === 786892), // All of Us Strangers
     FILMS.find(f => f.id === 376867), // Moonlight
-    FILMS.find(f => f.id === 426426), // Portrait of a Lady on Fire
-    FILMS.find(f => f.id === 142),    // Brokeback Mountain
+    FILMS.find(f => f.id === 955916), // Love Lies Bleeding
+    FILMS.find(f => f.id === 816892), // Close
     FILMS.find(f => f.id === 258480), // Carol
-    FILMS.find(f => f.id === 290098), // The Handmaiden
-    FILMS.find(f => f.id === 64686),  // Weekend
+    FILMS.find(f => f.id === 426426), // Portrait of a Lady on Fire
+    FILMS.find(f => f.id === 85552),  // Young Royals
   ].filter(Boolean);
 
   let heroIndex = 0;
